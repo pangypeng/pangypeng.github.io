@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: git | Pang&#39;s Blog</title>
+  <title>Hibernate学习之ORM概述 | Pang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="你丫才程序猿">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Pang's Blog">
-<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/tags/git/index.html">
+  <meta name="description" content="Hibernate是一个高性能的对象/关系型持久化存储和查询的服务。主要完成Java类到数据库表的映射、Java类字段到数据表字段的映射以及Java类字段类型到数据库表字段类型的映射。也提供了数据查询和检索的服务。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate学习之ORM概述">
+<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/2015/10/07/Hibernate学习之ORM概述/index.html">
 <meta property="og:site_name" content="Pang's Blog">
-<meta property="og:description" content="你丫才程序猿">
+<meta property="og:description" content="Hibernate是一个高性能的对象/关系型持久化存储和查询的服务。主要完成Java类到数据库表的映射、Java类字段到数据表字段的映射以及Java类字段类型到数据库表字段类型的映射。也提供了数据查询和检索的服务。">
+<meta property="og:image" content="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-01.jpg">
+<meta property="og:updated_time" content="2015-10-07T11:06:40.990Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pang's Blog">
-<meta name="twitter:description" content="你丫才程序猿">
+<meta name="twitter:title" content="Hibernate学习之ORM概述">
+<meta name="twitter:description" content="Hibernate是一个高性能的对象/关系型持久化存储和查询的服务。主要完成Java类到数据库表的映射、Java类字段到数据表字段的映射以及Java类字段类型到数据库表字段类型的映射。也提供了数据查询和检索的服务。">
   
   
     <link rel="icon" href="favicon.png">
@@ -121,49 +123,255 @@
 </aside>
 
       
-      <section id="main">
-    <section class="archives-wrap">
-    <div class="archive-tag-wrap">
-      <span class="archive-tag">#git</span>
-    </div>
-    <div class="archives">
+      <section id="main"><article id="post-Hibernate学习之ORM概述" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
     
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/05/Git命令快速参考/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-05.png)" alt="Git命令快速参考" class="thumbnail-image"></span>
-  
-</a>
-    </div>
+<div class="article-gallery">
+  <div class="article-gallery-photos">
     
-    <header class="archive-article-header">
-      
+      <a class="article-gallery-img fancybox" href="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-01.jpg" rel="gallery_cifgicg6c000018i9oov9o3st">
+        <img src="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-01.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/05/Git命令快速参考/">Git命令快速参考</a>
+    <h1 class="article-title" itemprop="name">
+      Hibernate学习之ORM概述
     </h1>
   
 
-      
-        
-  <div class="archive-article-date">
+        <div class="article-meta">
+          
+  <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/05/Git命令快速参考/">
-      <time datetime="2015-10-05T12:39:53.000Z" itemprop="datePublished">2015 10月 5</time>
+    <a href="/2015/10/07/Hibernate学习之ORM概述/">
+      <time datetime="2015-10-07T03:55:05.000Z" itemprop="datePublished">2015-10-07</time>
     </a>
   </div>
 
 
-      
-    </header>
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
   </div>
-</article>
+
+        </div>
+      </header>
     
-    </div></section>
-    </section>
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>Hibernate是一个高性能的对象/关系型持久化存储和查询的服务。主要完成Java类到数据库表的映射、Java类字段到数据表字段的映射以及Java类字段类型到数据库表字段类型的映射。也提供了数据查询和检索的服务。<br><a id="more"></a></p>
+<h2 id="ORM概述">ORM概述</h2><p><strong> 什么是JDBC </strong><br>JDBC代表Java Database Connectivity，它提供了一组Java API 来访问关系型数据库的Java应用程序。这些Java API 可以使Java应用程序执行SQL语句，能够与任何符合SQL规范的数据库进行交互。</p>
+<p>JDBC提供了一个灵活的框架来编写操作数据库的独立的应用程序，该应用程序具有Java的跨平台特性，能够与不同的DBMS（数据库管理系统）进行交互</p>
+<p><strong> JDBC的优点和缺点 </strong></p>
+<table>
+<thead>
+<tr>
+<th>JDBC的优点</th>
+<th>JDBC的缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>干净整洁的SQL处理</td>
+<td>大项目中使用很复杂</td>
+</tr>
+<tr>
+<td>大数据下有良好的性能</td>
+<td>很多的编程成本</td>
+</tr>
+<tr>
+<td>对于小应用特别好</td>
+<td>没有封装</td>
+</tr>
+<tr>
+<td>易学的简易语法</td>
+<td>难以实现MVC概念</td>
+</tr>
+<tr>
+<td>速度比较快</td>
+<td>查询需要指定DBMS</td>
+</tr>
+</tbody>
+</table>
+<p><strong> 为什么要使用关系映射（ORM）？ </strong></p>
+<p>我们工作在一个面向对象的系统中时，存在一个对象模型和关系数据库不匹配的问题。RDBMS(关系数据库管理系统)使用表格的形式存储数据，然而像Java这样的面向对象的语言表示一个对象关联图。例如一个带有构造函数和公有方法的Java类：</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Employee</span>{
+    <span class="keyword">private</span> Integer id;
+    <span class="keyword">private</span> String name;
+    <span class="keyword">private</span> <span class="keyword">int</span> salary;
+    <span class="function"><span class="keyword">public</span> <span class="title">Employee</span>(<span class="params"></span>)</span>{
+    }
+    <span class="function"><span class="keyword">public</span> <span class="title">Employee</span>(<span class="params">String name, <span class="keyword">int</span> salary</span>)</span>{
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.salary = salary;
+    }
+    <span class="comment">//setter和getter</span>
+}
+</code></pre><p>现在考虑将上面的对象存储和索引到对应的RDBMS表格中</p>
+<pre><code><span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> employee(
+        <span class="keyword">id</span> <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span> auto_increment primary <span class="keyword">key</span>,
+        <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">not</span> <span class="literal">null</span>,
+        salary <span class="built_in">int</span> <span class="keyword">default</span> <span class="literal">null</span>
+    );</span>
+</code></pre><p>目前有以下两个问题</p>
+<ul>
+<li>第一、在开发应用程序的工程中需要修改数据库的设计该怎么办？</li>
+<li>第二、在关系型数据库中存储和索引对象时面临的不匹配问题…</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>不匹配</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>粒度</td>
+<td>有时会有一个对象模型，该模型的数量比数据库中关联的表的数量多</td>
+</tr>
+<tr>
+<td>继承</td>
+<td>关系型数据库中无法定义在面向对象语言中本来就有的继承</td>
+</tr>
+<tr>
+<td>关联</td>
+<td>面向对象的语言使用对象引用来表示关联，数据库使用外键表示关联</td>
+</tr>
+<tr>
+<td>导航</td>
+<td>在Java和数据库中访问数据的方式完全不同</td>
+</tr>
+<tr>
+<td>身份</td>
+<td>在数据库中使用主键来确定一条记录，在Java中定义对象判等（a==b）对象值判等（a.equals(b)）</td>
+</tr>
+</tbody>
+</table>
+<p>object-relational mapping(ORM)就是来解决上述不匹配问题的！</p>
+<p><strong> 什么是ORM？ </strong></p>
+<p>ORM是一种方便在关系型数据库和面向对象编程语言中转换书籍的技术。一个ORM系统相比于普通的JDBC有如下优点：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>优点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>使用业务代码访问对象而不是数据库的表</td>
+</tr>
+<tr>
+<td>2</td>
+<td>从面向对象逻辑中隐藏SQL查询的细节</td>
+</tr>
+<tr>
+<td>3</td>
+<td>基于JDBC的 “ under the hood”</td>
+</tr>
+<tr>
+<td>4</td>
+<td>没有必要去处理数据库实现</td>
+</tr>
+<tr>
+<td>5</td>
+<td>实现是基于业务的概念而不是数据库的结构</td>
+</tr>
+<tr>
+<td>6</td>
+<td>事务管理和键的自动实现</td>
+</tr>
+<tr>
+<td>7</td>
+<td>应用程序的快速开发</td>
+</tr>
+</tbody>
+</table>
+<p>一个ORM解决方案有一下四个实体组成：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>优点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>一个API在持久类的基础上实现基本的crud</td>
+</tr>
+<tr>
+<td>2</td>
+<td>一个语言或API来指定应用类的属性和查询</td>
+</tr>
+<tr>
+<td>3</td>
+<td>一个可配置的服务用来制定映射元数据</td>
+</tr>
+<tr>
+<td>4</td>
+<td>一个技术和事务对象交互执行dirty checking,lazy association fethcing 和其他优化功能</td>
+</tr>
+</tbody>
+</table>
+<p><strong> JavaORM 框架 </strong></p>
+<p>Java中有几个持久化的框架和ORM选项：</p>
+<ul>
+<li>Hibernate </li>
+<li>Mybatis</li>
+<li>Toplink</li>
+<li>Spring Dao</li>
+<li>….</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pangypeng/pangypeng.github.io/2015/10/07/Hibernate学习之ORM概述/" data-id="cifgicg6c000018i9oov9o3st" class="article-share-link">分享到</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/07/Hibernate学习之简介/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Hibernate学习之简介
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/05/使用Hexo搭建Github-Pages/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">使用Hexo搭建Github pages</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+</section>
       
         <aside id="sidebar">
   

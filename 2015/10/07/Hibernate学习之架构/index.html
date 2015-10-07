@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: git | Pang&#39;s Blog</title>
+  <title>Hibernate学习之架构 | Pang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="你丫才程序猿">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Pang's Blog">
-<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/tags/git/index.html">
+  <meta name="description" content="Hibernate架构是分层的，作为数据访问层，开发人员不必知道底层API。Hibernate使用数据库以及配置数据库来为应用程序提供持续性服务。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate学习之架构">
+<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/2015/10/07/Hibernate学习之架构/index.html">
 <meta property="og:site_name" content="Pang's Blog">
-<meta property="og:description" content="你丫才程序猿">
+<meta property="og:description" content="Hibernate架构是分层的，作为数据访问层，开发人员不必知道底层API。Hibernate使用数据库以及配置数据库来为应用程序提供持续性服务。">
+<meta property="og:image" content="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-03.jpg">
+<meta property="og:updated_time" content="2015-10-07T12:02:55.487Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pang's Blog">
-<meta name="twitter:description" content="你丫才程序猿">
+<meta name="twitter:title" content="Hibernate学习之架构">
+<meta name="twitter:description" content="Hibernate架构是分层的，作为数据访问层，开发人员不必知道底层API。Hibernate使用数据库以及配置数据库来为应用程序提供持续性服务。">
   
   
     <link rel="icon" href="favicon.png">
@@ -121,49 +123,115 @@
 </aside>
 
       
-      <section id="main">
-    <section class="archives-wrap">
-    <div class="archive-tag-wrap">
-      <span class="archive-tag">#git</span>
-    </div>
-    <div class="archives">
+      <section id="main"><article id="post-Hibernate学习之架构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
     
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/05/Git命令快速参考/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-05.png)" alt="Git命令快速参考" class="thumbnail-image"></span>
-  
-</a>
-    </div>
+<div class="article-gallery">
+  <div class="article-gallery-photos">
     
-    <header class="archive-article-header">
-      
+      <a class="article-gallery-img fancybox" href="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-03.jpg" rel="gallery_cifgovcqe000480i92e2bg8xo">
+        <img src="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-03.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/05/Git命令快速参考/">Git命令快速参考</a>
+    <h1 class="article-title" itemprop="name">
+      Hibernate学习之架构
     </h1>
   
 
-      
-        
-  <div class="archive-article-date">
+        <div class="article-meta">
+          
+  <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/05/Git命令快速参考/">
-      <time datetime="2015-10-05T12:39:53.000Z" itemprop="datePublished">2015 10月 5</time>
+    <a href="/2015/10/07/Hibernate学习之架构/">
+      <time datetime="2015-10-07T12:02:55.487Z" itemprop="datePublished">2015-10-07</time>
     </a>
   </div>
 
 
-      
-    </header>
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
   </div>
-</article>
+
+        </div>
+      </header>
     
-    </div></section>
-    </section>
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>Hibernate架构是分层的，作为数据访问层，开发人员不必知道底层API。Hibernate使用数据库以及配置数据库来为应用程序提供持续性服务。<br><a id="more"></a></p>
+<p>下面是一个Hibernate应用程序架构视图：<br><img src="http://7xn9sb.com1.z0.glb.clouddn.com/hibernate-frame.jpg" alt=""><br>下面是一个详细的Hibernate应用程序体现架构视图以及一些重要类：<br><img src="http://7xn9sb.com1.z0.glb.clouddn.com/hibernate-frame-detail.jpg" alt=""></p>
+<p>Hibernate使用不同的现存Java API，比如JDBC，Java事务API（JTA），以及Java命名和目录界面（JNDI）。JDBC提供了一个抽象级别的通用关系数据库的功能，Hibernate几乎支持所有的JDBC驱动。</p>
+<h2 id="Hibernate应用程序架构涉及的配置文件">Hibernate应用程序架构涉及的配置文件</h2><p><strong> 1、hibernate.cfg.xml/hibernate.properties </strong></p>
+<p>Hibernate全局配置文件，主要包括三种组件：</p>
+<ul>
+<li>数据库连接：<br><code>&lt;property name=&quot;connection.username&quot;&gt;root&lt;/property&gt;</code></li>
+<li>类映射配置：<br><code>&lt;mapping resource=&quot;com/pang/hibernate/domain/Person.hbm.xml&quot; /&gt;</code></li>
+<li>其他配置：<br><code>&lt;property name=&quot;hbm2ddl.auto&quot;&gt;update&lt;/property&gt;</code></li>
+</ul>
+<p><strong> 2、*.hbm.xml </strong></p>
+<p>Hibernate映射文件，主要作用：</p>
+<ul>
+<li>Java类与数据库表之间的映射<br><code>&lt;class name=&quot;com.pang.hibernate.domain.Person&quot; table=&quot;person&quot;&gt;</code></li>
+<li>Java类的字段与数据库表的字段之间映射</li>
+<li>Java类的字段类型与数据库表字段类型之间的映射<br><code>&lt;id name=&quot;pid&quot; column=&quot;pid&quot; length=&quot;20&quot; type=&quot;java.lang.Long&quot;&gt;</code><br><code>&lt;property name=&quot;pname&quot; column=&quot;pname&quot; length=&quot;100&quot; type=&quot;java.lang.String&quot;&gt;&lt;/property&gt;</code></li>
+</ul>
+<h2 id="Hibernate应用程序架构涉及的每一个类对象">Hibernate应用程序架构涉及的每一个类对象</h2><p><strong> Configurtion </strong></p>
+<p>配置对象是在创建Hibernate应用程序时创建的第一个Hibernate对象，并且经常只在应用程序初始化期间创建。代表Hibernate所需要一个配置或者属性文件。配置对象提供几种基本组件：</p>
+<ul>
+<li>数据库连接：有Hibernate支持的一个或者多个配置文件处理。这些文件是hibernate.properties或者hibernate.cfg.xml</li>
+<li>类映射设置:这个组件创建了Java类和数据库表格之间的联系。</li>
+</ul>
+<p><strong> SessionFactory </strong></p>
+<p>Configuration对象被用于创建一个SessionFactory对象，使用提供的配置文件为应用程序依次配置Hibernate，并允许实例化一个回话对象。SessionFactory是一个线程安全对象并被应用程序所有的对象使用。</p>
+<p>SessionFactory是一个重量级对象，通常在应用程序启动时创建然后留存为以后使用。每一个数据库需要一个SessionFactory对象使用一个单独的配置文件。所以若果使用多数据库时要创建多种SessionFactory对象。</p>
+<p><strong> Session </strong></p>
+<p>一个回话被用于与数据库的物理连接。Session对象时轻量级的，并被设计为每次实例化都需要与数据库交互、持久对象通过Session对象保存和检索。</p>
+<p>Session对象不应该长时间保持开启转态，因为它们通常情况下不是线程安全的，并且它们应该按照所需创建和销毁。</p>
+<p><strong> Transaction </strong></p>
+<p>一个事务代表了与数据库工作的一个单元并且大部分RDBMS支持事务功能。在Hibernate中事务由底层事务管理器处理</p>
+<p><strong> Query </strong> </p>
+<p>Query使用SQL或者HQL查询语言，在数据库中检索数据并创建对象。一个查询的实例被用于连接查询参数，限制有查询返回的结果数量，并最终执行查询。</p>
+<p><strong> Criteria </strong></p>
+<p>Criteria对象被用于创建和执行面向规则查询的对象来检索对象。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pangypeng/pangypeng.github.io/2015/10/07/Hibernate学习之架构/" data-id="cifgovcqe000480i92e2bg8xo" class="article-share-link">分享到</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/07/Hibernate学习之简介/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Hibernate学习之简介</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+</section>
       
         <aside id="sidebar">
   
