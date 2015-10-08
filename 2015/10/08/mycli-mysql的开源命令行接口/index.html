@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: Hibernate | Pang&#39;s Blog</title>
+  <title>mycli ： mysql的开源命令行接口 | Pang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="你丫才程序猿">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Pang's Blog">
-<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/tags/Hibernate/index.html">
+  <meta name="description" content="mycli是一个具有自动补齐输入和语法高亮的MySQL命令行接口。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mycli ： mysql的开源命令行接口">
+<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/2015/10/08/mycli-mysql的开源命令行接口/index.html">
 <meta property="og:site_name" content="Pang's Blog">
-<meta property="og:description" content="你丫才程序猿">
+<meta property="og:description" content="mycli是一个具有自动补齐输入和语法高亮的MySQL命令行接口。">
+<meta property="og:image" content="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-14.jpg">
+<meta property="og:updated_time" content="2015-10-08T07:51:25.819Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pang's Blog">
-<meta name="twitter:description" content="你丫才程序猿">
+<meta name="twitter:title" content="mycli ： mysql的开源命令行接口">
+<meta name="twitter:description" content="mycli是一个具有自动补齐输入和语法高亮的MySQL命令行接口。">
   
   
     <link rel="icon" href="favicon.png">
@@ -121,117 +123,105 @@
 </aside>
 
       
-      <section id="main">
-    <section class="archives-wrap">
-    <div class="archive-tag-wrap">
-      <span class="archive-tag">#Hibernate</span>
-    </div>
-    <div class="archives">
+      <section id="main"><article id="post-mycli-mysql的开源命令行接口" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
     
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/08/Hibernate学习之（二）简介/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-02.jpg)" alt="Hibernate学习之（二）简介" class="thumbnail-image"></span>
-  
-</a>
-    </div>
+<div class="article-gallery">
+  <div class="article-gallery-photos">
     
-    <header class="archive-article-header">
-      
+      <a class="article-gallery-img fancybox" href="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-14.jpg" rel="gallery_cifhxc2780006f0i9u08uuwaa">
+        <img src="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-14.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/08/Hibernate学习之（二）简介/">Hibernate学习之（二）简介</a>
+    <h1 class="article-title" itemprop="name">
+      mycli ： mysql的开源命令行接口
     </h1>
   
 
-      
-        
-  <div class="archive-article-date">
+        <div class="article-meta">
+          
+  <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/Hibernate学习之（二）简介/">
-      <time datetime="2015-10-08T06:24:18.475Z" itemprop="datePublished">2015 10月 8</time>
+    <a href="/2015/10/08/mycli-mysql的开源命令行接口/">
+      <time datetime="2015-10-08T07:51:25.819Z" itemprop="datePublished">2015-10-08</time>
     </a>
   </div>
 
 
-      
-    </header>
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/SQL/">SQL</a>
   </div>
-</article>
+
+        </div>
+      </header>
     
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/08/Hibernate学习之（三）架构/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-03.jpg)" alt="Hibernate学习之（三）架构" class="thumbnail-image"></span>
-  
-</a>
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>mycli是一个具有自动补齐输入和语法高亮的MySQL命令行接口。<a id="more"></a>官方网站：<a href="http://mycli.net" target="_blank" rel="external">http://mycli.net</a></p>
+<p>使用python安装mycli，</p>
+<pre><code>$ pip <span class="keyword">install</span> mycli
+</code></pre><p>mycli的基础语法：</p>
+<pre><code>$ mycli --help
+Usage: mycli [OPTIONS] [DATABASE]
+
+Options:
+  -<span class="ruby">h, --host <span class="constant">TEXT</span>         <span class="constant">Host</span> address of the database.
+</span>  -<span class="ruby"><span class="constant">P</span>, --port <span class="constant">TEXT</span>         <span class="constant">Port</span> number to use <span class="keyword">for</span> connection. <span class="constant">Honors</span>
+</span>                      $MYSQL_TCP_PORT
+  -<span class="ruby">u, --user <span class="constant">TEXT</span>         <span class="constant">User</span> name to connect to the database.
+</span>  -<span class="ruby"><span class="constant">S</span>, --socket <span class="constant">TEXT</span>       <span class="constant">The</span> socket file to use <span class="keyword">for</span> connection.
+</span>  -<span class="ruby">p, --password          <span class="constant">Force</span> password prompt.
+</span>  -<span class="ruby">-pass <span class="constant">TEXT</span>             <span class="constant">Password</span> to connect to the database
+</span>  -<span class="ruby">v, --version           <span class="constant">Version</span> of mycli.
+</span>  -<span class="ruby"><span class="constant">D</span>, --database <span class="constant">TEXT</span>     <span class="constant">Database</span> to use.
+</span>  -<span class="ruby"><span class="constant">R</span>, --prompt <span class="constant">TEXT</span>       <span class="constant">Prompt</span> format (<span class="constant">Default</span><span class="symbol">:</span> <span class="string">"\t \u@\h:\d&gt; "</span>)
+</span>  -<span class="ruby">l, --logfile <span class="constant">FILENAME</span>  <span class="constant">Log</span> every query <span class="keyword">and</span> its results to a file.
+</span>  -<span class="ruby">-help                  <span class="constant">Show</span> this message <span class="keyword">and</span> exit.</span>
+</code></pre><p>例子</p>
+<pre><code><span class="variable">$ </span>mycli local_database
+<span class="variable">$ </span>mycli -h localhost -u root app_db
+<span class="variable">$ </span>mycli -h localhost -u root -p
+<span class="variable">$ </span>mycli <span class="symbol">mysql:</span>/<span class="regexp">/amjith@localhost:3306/django</span>_poll
+</code></pre>
+      
     </div>
-    
-    <header class="archive-article-header">
+    <footer class="article-footer">
+      <a data-url="https://github.com/pangypeng/pangypeng.github.io/2015/10/08/mycli-mysql的开源命令行接口/" data-id="cifhxc2780006f0i9u08uuwaa" class="article-share-link">分享到</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/08/Hibernate学习之（三）架构/">Hibernate学习之（三）架构</a>
-    </h1>
-  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
 
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/Hibernate学习之（三）架构/">
-      <time datetime="2015-10-08T06:24:10.804Z" itemprop="datePublished">2015 10月 8</time>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/08/MySQL入门之（八）设置用户密码并删除匿名用户/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">MySQL入门之（八）设置用户密码并删除匿名用户</div>
     </a>
-  </div>
+  
+</nav>
 
 
-      
-    </header>
-  </div>
+  
 </article>
-    
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/07/Hibernate学习之（一）ORM概述/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-01.jpg)" alt="Hibernate学习之（一）ORM概述" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/07/Hibernate学习之（一）ORM概述/">Hibernate学习之（一）ORM概述</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/07/Hibernate学习之（一）ORM概述/">
-      <time datetime="2015-10-07T03:55:05.000Z" itemprop="datePublished">2015 10月 7</time>
-    </a>
-  </div>
 
 
-      
-    </header>
-  </div>
-</article>
-    
-    </div></section>
-    </section>
+</section>
       
         <aside id="sidebar">
   
