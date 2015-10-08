@@ -3,22 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>使用Hexo搭建Github pages | Pang&#39;s Blog</title>
+  <title>MySQL入门之（二）SQL示例 | Pang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Hexo概述Hexo是一个快速、简洁且高效的博客框架。Hexo使用Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
-安装前提：安装Hexo前，必须确保已安装Node.js和Git">
+  <meta name="description" content="SQL（Structured Query Language结构化查询语言）是一种高级的语言，通过SQL语句我们可以操作关系型数据库，如：创建、更新、查询和删除记录。SQL定义了一组实现这类功能的命令：如：SELECT, INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE等。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Hexo搭建Github pages">
-<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/2015/10/05/使用Hexo搭建Github-Pages/index.html">
+<meta property="og:title" content="MySQL入门之（二）SQL示例">
+<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/2015/10/08/MySQL入门之（二）SQL示例/index.html">
 <meta property="og:site_name" content="Pang's Blog">
-<meta property="og:description" content="Hexo概述Hexo是一个快速、简洁且高效的博客框架。Hexo使用Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
-安装前提：安装Hexo前，必须确保已安装Node.js和Git">
-<meta property="og:image" content="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-04.jpg">
-<meta property="og:updated_time" content="2015-10-06T00:34:01.094Z">
+<meta property="og:description" content="SQL（Structured Query Language结构化查询语言）是一种高级的语言，通过SQL语句我们可以操作关系型数据库，如：创建、更新、查询和删除记录。SQL定义了一组实现这类功能的命令：如：SELECT, INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE等。">
+<meta property="og:image" content="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-07.jpg">
+<meta property="og:updated_time" content="2015-10-08T06:48:32.525Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Hexo搭建Github pages">
-<meta name="twitter:description" content="Hexo概述Hexo是一个快速、简洁且高效的博客框架。Hexo使用Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
-安装前提：安装Hexo前，必须确保已安装Node.js和Git">
+<meta name="twitter:title" content="MySQL入门之（二）SQL示例">
+<meta name="twitter:description" content="SQL（Structured Query Language结构化查询语言）是一种高级的语言，通过SQL语句我们可以操作关系型数据库，如：创建、更新、查询和删除记录。SQL定义了一组实现这类功能的命令：如：SELECT, INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE等。">
   
   
     <link rel="icon" href="favicon.png">
@@ -126,15 +123,15 @@
 </aside>
 
       
-      <section id="main"><article id="post-使用Hexo搭建Github-Pages" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-MySQL入门之（二）SQL示例" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-04.jpg" rel="gallery_cifhx3mlu0001vwi9jwigdaff">
-        <img src="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-04.jpg" itemprop="image">
+      <a class="article-gallery-img fancybox" href="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-07.jpg" rel="gallery_cifhx3mmx000kvwi91nxo2wnv">
+        <img src="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-07.jpg" itemprop="image">
       </a>
     
   </div>
@@ -145,7 +142,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      使用Hexo搭建Github pages
+      MySQL入门之（二）SQL示例
     </h1>
   
 
@@ -153,8 +150,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/05/使用Hexo搭建Github-Pages/">
-      <time datetime="2015-10-05T14:13:43.000Z" itemprop="datePublished">2015-10-05</time>
+    <a href="/2015/10/08/MySQL入门之（二）SQL示例/">
+      <time datetime="2015-10-08T06:48:32.525Z" itemprop="datePublished">2015-10-08</time>
     </a>
   </div>
 
@@ -162,7 +159,7 @@
           
   <div class="article-category">
   	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/node-js/">node.js</a>
+    <a class="article-category-link" href="/categories/SQL/">SQL</a>
   </div>
 
         </div>
@@ -171,50 +168,82 @@
     <div class="article-entry" itemprop="articleBody">
       
                 
-        <h2 id="Hexo概述">Hexo概述</h2><p>Hexo是一个快速、简洁且高效的博客框架。Hexo使用Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h2 id="安装">安装</h2><p>前提：安装Hexo前，必须确保已安装Node.js和Git<br><a id="more"></a><br>若果您的电脑已经安装上述应用程序，则使用<em>npm</em>即可完成Hexo的安装。</p>
-<pre><code>$ npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> hexo-cli</span>
-</code></pre><h2 id="建站">建站</h2><p>安装Hexo完成后，在任意目录下建立文件夹，例如在D盘建立Hexo文件夹。进入该文件夹，执行下列命令：</p>
-<pre><code><span class="variable">$ </span>hexo init 
-<span class="variable">$ </span>npm install
-</code></pre><p>新建完成后，Hexo文件夹中的目录如下：</p>
-<pre><code>|<span class="string">------_config.xml     #全局配置文件
-</span>|<span class="string">------db.json           # 静态常量
-</span>|<span class="string">------source             
-</span>|<span class="string">        </span>|<span class="string">-----_posts        #你的markdown博文源文件
-</span>|<span class="string">------themes         #主题文件
-</span>|<span class="string">------scaffolds      #脚手架，也就是一个工具模板
-</span>|<span class="string">------scripts          #写文件的js，扩展hexo的功能
-</span>|<span class="string">____package.json   #应用程序的信息        </span>
-</code></pre><h2 id="Github建库">Github建库</h2><p>使用Github建立一个版本库名称为username.github.io的库</p>
-<pre><code><span class="preprocessor">#username为您Github的账号名称</span>
-</code></pre><h2 id="配置">配置</h2><p>在Hexo文件夹下，使用如下命令克隆版本库：</p>
-<pre><code>$ git clone git@github<span class="class">.com</span>:username/username<span class="class">.github</span><span class="class">.io</span><span class="class">.git</span>
-</code></pre><p>打开_config.xml文件，修改配置：</p>
-<pre><code><span class="attribute">public_dir</span>: usernaem.github.io
-#注意：冒号与参数值之间必须有空格
-<span class="attribute">deploy</span>:
-    <span class="attribute">type</span>: git
-    <span class="attribute">repository</span>: <span class="attribute">https</span>:<span class="comment">//github.com/username/username.github.io.git</span>
-    <span class="attribute">branch</span>: master
-</code></pre><p>使用命令生成静态文件并启动服务器：</p>
-<pre><code>$ hexo <span class="keyword">g</span> &amp;&amp; hexo <span class="literal">s</span>
-</code></pre><p>在浏览器中访问</p>
-<pre><code><span class="string">http:</span><span class="comment">//127.0.0.1:4000</span>
-</code></pre><h2 id="发布的Github_Pages">发布的Github Pages</h2><p><strong> 安装Deployer </strong></p>
-<pre><code>$ npm <span class="operator"><span class="keyword">install</span> hexo-depolyer-git <span class="comment">--save</span></span>
-</code></pre><p>使用命令：</p>
-<pre><code>$ hexo <span class="keyword">g</span> &amp;&amp; hexo <span class="literal">d</span>
-</code></pre><p>使用浏览器访问：</p>
-<pre><code><span class="string">http:</span><span class="comment">//username.github.io/</span>
-</code></pre>
+        <p>SQL（Structured Query Language结构化查询语言）是一种高级的语言，通过SQL语句我们可以操作关系型数据库，如：创建、更新、查询和删除记录。SQL定义了一组实现这类功能的命令：如：SELECT, INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE等。<br><a id="more"></a></p>
+<h2 id="SQL事例：">SQL事例：</h2><p>这里已经在数据库“studentdb”中创建好一个表“class101”，这个表有三个字段id, name和gpa（Grade Point Average – 平均分）。对于表的列需要为其指定数据类型，此处给id指定为int类型，gpa指定为float类型，name指定为varchar(50)（长度可变，最长50个英文字符）。表中已经写入了3条数据。</p>
+<p>Database:studentdb</p>
+<p>Table:class101</p>
+<pre><code><span class="code">+-----------+</span>--------------------<span class="code">+-------------+</span>
+<span class="header">| id (INT)  | name (VARCHAR(50)) | gpa (FLOAT) |
++-----------+--------------------+-------------+</span>
+|   11      | Tom                |  4.4        |
+|   33      | Jack               |  4.8        |
+<span class="header">|   44      | Kevin              |  4.6        |
++-----------+--------------------+-------------+</span>
+</code></pre><p>SQL为我们提供了简单并且直观的方式用于实现关系型数据库的交互。</p>
+<h2 id="SELECT语句：">SELECT语句：</h2><p>–语法</p>
+<pre><code><span class="operator"><span class="keyword">SELECT</span> column1, column2,... <span class="keyword">FROM</span> tableName <span class="keyword">WHERE</span> criteria
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> tableName <span class="keyword">WHERE</span> criteria <span class="comment">-- 查询所有列</span></span>
+</code></pre><p>–示例 </p>
+<pre><code><span class="operator"><span class="keyword">SELECT</span> <span class="keyword">name</span>, gpa <span class="keyword">FROM</span> class101</span>
+</code></pre><p>–查询表class101中的name和gpa字段</p>
+<pre><code><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> class101
+</code></pre><p>— *表明查询表class101中的全部字段</p>
+<pre><code><span class="operator"><span class="keyword">SELECT</span> <span class="keyword">name</span>, gpa <span class="keyword">FROM</span> class101 <span class="keyword">WHERE</span> gpa &gt;= <span class="number">2.0</span></span>
+</code></pre><p>— 你可以将以下操作符用于数字的比较：=, &gt;, &lt;, &gt;=, &lt;=, &lt;&gt; (!=)</p>
+<pre><code><span class="operator"><span class="keyword">SELECT</span> <span class="keyword">name</span>, gpa <span class="keyword">FROM</span> class101 <span class="keyword">WHERE</span> <span class="keyword">name</span> = <span class="string">'Tom'</span></span>
+</code></pre><p>— 完全匹配字符串 (= or !=)，字符串必须由单引号’括起来</p>
+<pre><code><span class="operator"><span class="keyword">SELECT</span> <span class="keyword">name</span>, gpa <span class="keyword">FROM</span> class101 <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'K_v%'</span></span>
+</code></pre><ul>
+<li>“LIKE”用于字符串模糊匹配</li>
+<li>通配符%匹配0个或多个字符</li>
+<li>通配符_匹配1个字符</li>
+</ul>
+<pre><code><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> class101 <span class="keyword">WHERE</span> gpa &gt; <span class="number">3.0</span> <span class="keyword">OR</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'%K_v%'</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> gpa <span class="keyword">DESC</span>, <span class="keyword">name</span> <span class="keyword">ASC</span></span>
+</code></pre><p>— 在查询条件中我们可以使用AND（与），OR（或），NOT（非）</p>
+<p>— 结果的排序可以使用DESC（倒序）或ASC（正序）</p>
+<h2 id="DELETE语句">DELETE语句</h2><p>— 语法</p>
+<pre><code><span class="operator"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> tableName <span class="keyword">WHERE</span> criteria</span>
+</code></pre><p>— 示例</p>
+<pre><code><span class="keyword">DELETE</span> <span class="keyword">FROM</span> class101
+</code></pre><p>— 删除表”class101”中的所有数据，该命令一定要谨慎使用！</p>
+<pre><code><span class="operator"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> class101 <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">33</span></span>
+</code></pre><p>— 删除id为33的记录</p>
+<h2 id="INSERT语句">INSERT语句</h2><p>— 语法</p>
+<pre><code><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tableName <span class="keyword">VALUES</span> (firstColumnValue, ..., lastColumnValue)       <span class="comment">-- 填写所有列值</span>
+<span class="keyword">INSERT</span> <span class="keyword">INTO</span> tableName (column1, column2, ...) <span class="keyword">VALUES</span> (value1, value2, ...)  <span class="comment">-- 填写指定列值</span></span>
+</code></pre><p>— 示例</p>
+<pre><code><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> class101 <span class="keyword">VALUES</span> (<span class="number">88</span>, <span class="string">'Jerry'</span>, <span class="number">4.88</span>)</span>
+</code></pre><p>— 为表class101中的每一个字段进行赋值</p>
+<pre><code><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> class101 (<span class="keyword">name</span>, gpa) <span class="keyword">VALUES</span> (<span class="string">'Jack'</span>, <span class="number">4.55</span>)</span>
+</code></pre><p>— 未提供值的列将被赋予默认值NULL</p>
+<h2 id="UPDATE更新">UPDATE更新</h2><p>— 语法</p>
+<pre><code><span class="operator"><span class="keyword">UPDATE</span> tableName <span class="keyword">SET</span> <span class="keyword">column</span> = <span class="keyword">value</span> <span class="keyword">WHERE</span> criteria</span>
+</code></pre><p>— 示例</p>
+<pre><code><span class="operator"><span class="keyword">UPDATE</span> class101 <span class="keyword">SET</span> gpa = <span class="number">5.0</span></span>
+</code></pre><p>— 更新所有记录gpa的值为5.0</p>
+<pre><code><span class="operator"><span class="keyword">UPDATE</span> class101 <span class="keyword">SET</span> gpa = gpa + <span class="number">1.0</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> = <span class="string">'Tom'</span></span>
+</code></pre><p>— 更新用户Tom的gpa为当前数值+1</p>
+<pre><code><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span>创建表</span>
+</code></pre><p>— 语法</p>
+<pre><code>CREATE TABLE tableName <span class="list">(<span class="keyword">column1Name</span> column1Type, column2Name column2Type, ...)</span>
+</code></pre><p>— 示例</p>
+<pre><code><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> class101 (<span class="keyword">id</span> <span class="built_in">INT</span>, <span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">50</span>), gpa <span class="built_in">FLOAT</span>)</span>
+</code></pre><p>— 创建表class101</p>
+<h2 id="DROP_TABLE删除表">DROP TABLE删除表</h2><p>— 语法</p>
+<pre><code><span class="operator"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> tableName</span>
+</code></pre><p>— 示例</p>
+<pre><code><span class="operator"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> class101</span>
+</code></pre><p>— 删除表class101，谨慎操作！</p>
+<p><strong> 备注：</strong> SQL关键字，名称（字段名、表名），字符串可能区分大小写也可能不区分大小写，这完全取决于数据库的具体实现。多数情况下数据库中的关键字是不区分大小写的（如MySQL）。为了清晰起见，以上例子中我们的关键字全部采用大写字母。</p>
+<p>对于程序员来说，最好的方式就是把名称和字符串按照大小写严格区分对待。 SQL字符串使用单引号’括起来，但是大多数数据库同时也支持双引号”。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pangypeng/pangypeng.github.io/2015/10/05/使用Hexo搭建Github-Pages/" data-id="cifhx3mlu0001vwi9jwigdaff" class="article-share-link">分享到</a>
+      <a data-url="https://github.com/pangypeng/pangypeng.github.io/2015/10/08/MySQL入门之（二）SQL示例/" data-id="cifhx3mmx000kvwi91nxo2wnv" class="article-share-link">分享到</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
 
     </footer>
   </div>
@@ -222,19 +251,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/10/07/Hibernate学习之（一）ORM概述/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/10/08/MySQL入门之（三）MySQL关系型数据库/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          Hibernate学习之（一）ORM概述
+          MySQL入门之（三）MySQL关系型数据库
         
       </div>
     </a>
   
   
-    <a href="/2015/10/05/Git命令快速参考/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/10/08/MySQL入门之（一）关系型数据库/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">Git命令快速参考</div>
+      <div class="article-nav-title">MySQL入门之（一）关系型数据库</div>
     </a>
   
 </nav>

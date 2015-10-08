@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Pang&#39;s Blog</title>
+  <title>MySQL入门之（八）设置用户密码并删除匿名用户 | Pang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="你丫才程序猿">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Pang's Blog">
-<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/index.html">
+  <meta name="description" content="之前已经提到过了，MySQL默认情况下已经创建了一个没有密码的”root”用户，”root”用户权限非常高我们使用”root”用户可以执行任何操作，如：删除所有数据库。因此有必要为”root”设置一个密码，这里的”root”用户仅用来管理数据库，不建议把它当作一个普通的用户来使用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL入门之（八）设置用户密码并删除匿名用户">
+<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/2015/10/08/MySQL入门之（八）设置用户密码并删除匿名用户/index.html">
 <meta property="og:site_name" content="Pang's Blog">
-<meta property="og:description" content="你丫才程序猿">
+<meta property="og:description" content="之前已经提到过了，MySQL默认情况下已经创建了一个没有密码的”root”用户，”root”用户权限非常高我们使用”root”用户可以执行任何操作，如：删除所有数据库。因此有必要为”root”设置一个密码，这里的”root”用户仅用来管理数据库，不建议把它当作一个普通的用户来使用。">
+<meta property="og:image" content="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-13.jpg">
+<meta property="og:updated_time" content="2015-10-08T07:39:43.184Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pang's Blog">
-<meta name="twitter:description" content="你丫才程序猿">
+<meta name="twitter:title" content="MySQL入门之（八）设置用户密码并删除匿名用户">
+<meta name="twitter:description" content="之前已经提到过了，MySQL默认情况下已经创建了一个没有密码的”root”用户，”root”用户权限非常高我们使用”root”用户可以执行任何操作，如：删除所有数据库。因此有必要为”root”设置一个密码，这里的”root”用户仅用来管理数据库，不建议把它当作一个普通的用户来使用。">
   
   
     <link rel="icon" href="favicon.png">
@@ -121,8 +123,7 @@
 </aside>
 
       
-      <section id="main">
-      <article id="post-MySQL入门之（八）设置用户密码并删除匿名用户" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-MySQL入门之（八）设置用户密码并删除匿名用户" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -140,8 +141,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/08/MySQL入门之（八）设置用户密码并删除匿名用户/">MySQL入门之（八）设置用户密码并删除匿名用户</a>
+    <h1 class="article-title" itemprop="name">
+      MySQL入门之（八）设置用户密码并删除匿名用户
     </h1>
   
 
@@ -166,12 +167,91 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前已经提到过了，MySQL默认情况下已经创建了一个没有密码的”root”用户，”root”用户权限非常高我们使用”root”用户可以执行任何操作，如：删除所有数据库。因此有必要为”root”设置一个密码，这里的”root”用户仅用来管理数据库，不建议把它当作一个普通的用户来使用。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/10/08/MySQL入门之（八）设置用户密码并删除匿名用户/#more">Read More</a>
-          </p>
-        
+                
+        <p>之前已经提到过了，MySQL默认情况下已经创建了一个没有密码的”root”用户，”root”用户权限非常高我们使用”root”用户可以执行任何操作，如：删除所有数据库。因此有必要为”root”设置一个密码，这里的”root”用户仅用来管理数据库，不建议把它当作一个普通的用户来使用。<br> <a id="more"></a></p>
+<h2 id="设置”root”用户密码">设置”root”用户密码</h2><p>让我们在命令行继续执行以下代码 — 从”mysql”数据库的”user”表中查询所有用户及密码 — “;”作为命令的结束符</p>
+<pre><code><span class="header">mysql&gt; SELECT host, user, password FROM mysql.user;
++-----------+------+----------+</span>
+<span class="header">| host      | user | password |
++-----------+------+----------+</span>
+| localhost | root |          |
+| 127.0.0.1 | root |          |
+| ::1       | root |          |
+<span class="header">| localhost |      |          |
++-----------+------+----------+</span>
+4 rows in set (0.09 sec)
+</code></pre><p>— 为’root’@’127.0.0.1’设置密码，将xxxx替换成你的密码</p>
+<p>— 注意字符串密码一定要在前后加上单引号’</p>
+<pre><code>mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'127.0.0.1'</span> = password(<span class="string">'xxxx'</span>);
+Query OK, <span class="number">0</span> rows affected (<span class="number">0.00</span> sec)
+</code></pre><p>— 为’root’@’localhost’设置密码</p>
+<pre><code>mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'localhost'</span> = password(<span class="string">'xxxx'</span>);
+Query OK, <span class="number">0</span> rows affected (<span class="number">0.00</span> sec)
+</code></pre><p>— 为’root’@’::1’设置密码</p>
+<pre><code>mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'::1'</span> = password(<span class="string">'xxxx'</span>);
+Query OK, <span class="number">0</span> rows affected (<span class="number">0.00</span> sec)
+</code></pre><p>— 此处再次查询用户名和密码 — 此处的密码是采用密文的形式存储的</p>
+<pre><code><span class="header">mysql&gt; SELECT host, user, password FROM mysql.user;
++-----------+------+-------------------------------------------+</span>
+<span class="header">| host      | user | password                                  |
++-----------+------+-------------------------------------------+</span>
+| localhost | root | <span class="strong">*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |
+| 127.0.0.1 | root | *</span>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |
+| ::1       | root | <span class="strong">*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |
+| localhost |      |                                           |
++-----------+------+-------------------------------------------+
+4 rows in set (0.00 sec)</span>
+</code></pre><p>— 退出并终止客户端程序</p>
+<pre><code>mysql&gt; <span class="keyword">quit</span>
+Bye
+</code></pre><p>解释说明</p>
+<pre><code><span class="operator"><span class="keyword">SELECT</span> host, <span class="keyword">user</span>, <span class="keyword">password</span> <span class="keyword">FROM</span> mysql.<span class="keyword">user</span>;</span>
+</code></pre><p>该命令将查询表”user”（”mysql”数据库）中的所有用户，你可以通过&lt;数据库&gt;.&lt;表名&gt;的方式引用，如：mysql.user。从中我们可以看出默认情况下MySQL内置了4个用户：</p>
+<pre><code><span class="string">'root'</span>@<span class="string">'localhost'</span>
+<span class="string">'root'</span>@<span class="string">'127.0.0.1'</span>
+<span class="string">'root'</span>@<span class="string">'::1'</span>
+<span class="string">''</span>@<span class="string">'localhost'</span> – 此处为匿名用户
+</code></pre><p>以上用户都未设置用户密码。这里我们需要注意的是MySQL通过三个属性唯一标识一个用户：用户名、密码和IP地址（此处为客户端的IP地址），例如：’root’用户只能从localhost，127.0.0.1或IPv6::1上进行登录，而不允许从其他地址上登录。</p>
+<p>SQL命令可以跨越多行，我们使用”;”作为命令的结束符，否则当我们键入回车后可以继续输入SQL命令，输入”;”表名执行命令，或’\c’取消当前命令，例如：</p>
+<pre><code>mysql&gt; SELECT host, <span class="built_ins">user</span>, password <span class="built_ins">FROM</span> mysql.<span class="built_ins">user</span>;
+......
+</code></pre><p>— 分号”;”是命令的结束符，它的作用是将命令发送到服务器端执行。</p>
+<pre><code>mysql&gt; <span class="keyword">SELECT</span> host, user, password FROM mysql<span class="built_in">.</span>user
+    <span class="subst">-&gt; </span>;
+<span class="attribute">...</span><span class="attribute">...</span>
+</code></pre><p>— 第一行命令并未完成，我们将分号”;”作为第二行的结束符，回车后将命令发送至服务器端。</p>
+<pre><code>mysql&gt; <span class="keyword">SELECT</span>
+ <span class="subst">-&gt; </span>host, user, password
+ <span class="subst">-&gt; </span>FROM mysql<span class="built_in">.</span>user;
+<span class="attribute">...</span><span class="attribute">...</span>
+</code></pre><p>— 也可以将SQL命令拆分成多行，最后用分号”;”作为结束符。</p>
+<pre><code><span class="label">mysql</span>&gt; <span class="keyword">SELECT </span>host, u \c
+</code></pre><p>— “\c”表明取消当前SQL命令，SQL命令将不发送至服务器。</p>
+<pre><code><span class="operator"><span class="keyword">SET</span> <span class="keyword">PASSWORD</span> <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'localhost'</span> = <span class="keyword">password</span>(<span class="string">'xxxx'</span>);</span>
+</code></pre><p>你可以使用”set password”命令为’root’@’localhost’, ‘root’@’127.0.0.1’和’root’@’::1’设置密码，此处的xxxx就是你的密码。”localhost”是一个特殊的hostname，他意味着本地”loop-back”（如：服务器与客户端运行在同一台设备上），还有两个IP地址，一个是IPv4的127.0.0.1，另一个是IPv6的::1。</p>
+<p>我们可以通过”quit”，”exit”或者输入ctrl+c命令终止客户端程序。 在客户端的命令行内我们可以通过键入”help”或”\h”命令获取帮助。</p>
+<p>使用密码启动客户端程序</p>
+<p>我们刚刚为”root”用户设置了密码，现在我们在使用客户端进行登录时我们就必须要指定”-p”选项了。此时在控制台将会提示我们输入密码：</p>
+<p>— 将当前目录切换至\bin</p>
+<pre><code>D:\Courses\MySQL\tools\mysql\bin&gt; mysql -u root -p
+Enter password: <span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>
+Welcome to the MySQL monitor.
+......
+</code></pre><p>— 客户端已经启动，这里我们随时输入SQL命令了</p>
+<pre><code>mysql&gt;
+</code></pre><h2 id="删除匿名用户">删除匿名用户</h2><p>考虑到安全因素，这里我们把匿名用户（即用户名为空的用户）删除掉：</p>
+<pre><code>mysql&gt; DROP USER '<span class="emphasis">'@'</span>localhost';
+<span class="header">mysql&gt; SELECT host, user, password FROM mysql.user;
++-----------+------+-------------------------------------------+</span>
+<span class="header">| host      | user | password                                  |
++-----------+------+-------------------------------------------+</span>
+| localhost | root | <span class="strong">*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |
+| 127.0.0.1 | root | *</span>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |
+<span class="header">| ::1       | root | *XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |
++-----------+------+-------------------------------------------+</span>
+3 rows in set (0.00 sec)
+mysql&gt; quit
+</code></pre>
       
     </div>
     <footer class="article-footer">
@@ -183,345 +263,23 @@
     </footer>
   </div>
   
-</article>
-
-
-
     
-      <article id="post-MySQL入门之（七）启动客户端" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-      <a class="article-gallery-img fancybox" href="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-12.jpg" rel="gallery_cifhx3mn4000qvwi9t9xr1ful">
-        <img src="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-12.jpg" itemprop="image">
-      </a>
-    
-  </div>
-</div>
-
-    
-      <header class="article-header">
-        
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/08/MySQL入门之（七）启动客户端/">MySQL入门之（七）启动客户端</a>
-    </h1>
   
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/MySQL入门之（七）启动客户端/">
-      <time datetime="2015-10-08T07:27:12.793Z" itemprop="datePublished">2015-10-08</time>
+    <a href="/2015/10/08/MySQL入门之（七）启动客户端/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">MySQL入门之（七）启动客户端</div>
     </a>
-  </div>
+  
+</nav>
 
 
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/SQL/">SQL</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>回想一下MySQL所采用的客户端/服务器架构，一旦服务器启动完成，多个客户端就可以同时连接到数据库了，客户端即可以与服务器在同一台设备上，也可以通过网络远程连接至服务器。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/10/08/MySQL入门之（七）启动客户端/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pangypeng/pangypeng.github.io/2015/10/08/MySQL入门之（七）启动客户端/" data-id="cifhx3mn4000qvwi9t9xr1ful" class="article-share-link">分享到</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
 
-
-    
-      <article id="post-MySQL入门之（六）启动服务器监听" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-      <a class="article-gallery-img fancybox" href="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-11.jpg" rel="gallery_cifhx3mmj000bvwi9m8mki5b1">
-        <img src="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-11.jpg" itemprop="image">
-      </a>
-    
-  </div>
-</div>
-
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/08/MySQL入门之（六）启动服务器监听/">MySQL入门之（六）启动服务器监听</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/MySQL入门之（六）启动服务器监听/">
-      <time datetime="2015-10-08T07:21:51.720Z" itemprop="datePublished">2015-10-08</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/SQL/">SQL</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>MySQL采用客户端/服务器架构方式。数据库运行在服务器端，用户通过客户端程序连接至服务器（本地方式或采用网络远程连接的方式）。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/10/08/MySQL入门之（六）启动服务器监听/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pangypeng/pangypeng.github.io/2015/10/08/MySQL入门之（六）启动服务器监听/" data-id="cifhx3mmj000bvwi9m8mki5b1" class="article-share-link">分享到</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-MySQL入门之（五）创建配置文件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-      <a class="article-gallery-img fancybox" href="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-10.jpg" rel="gallery_cifhx3mmt000hvwi9mtrldpcs">
-        <img src="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-10.jpg" itemprop="image">
-      </a>
-    
-  </div>
-</div>
-
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/08/MySQL入门之（五）创建配置文件/">MySQL入门之（五）创建配置文件</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/MySQL入门之（五）创建配置文件/">
-      <time datetime="2015-10-08T07:17:17.337Z" itemprop="datePublished">2015-10-08</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/SQL/">SQL</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>将/my-default.ini重命名为my.ini，#开头的是注释行，以下内容需要在my.ini设置正确。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/10/08/MySQL入门之（五）创建配置文件/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pangypeng/pangypeng.github.io/2015/10/08/MySQL入门之（五）创建配置文件/" data-id="cifhx3mmt000hvwi9mtrldpcs" class="article-share-link">分享到</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-MySQL入门之（四）下载并安装MySQL数据库" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-      <a class="article-gallery-img fancybox" href="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-09.jpg" rel="gallery_cifhx3mme0006vwi9y1wftu22">
-        <img src="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-09.jpg" itemprop="image">
-      </a>
-    
-  </div>
-</div>
-
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/08/MySQL入门之（四）下载并安装MySQL数据库/">MySQL入门之（四）下载并安装MySQL数据库</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/MySQL入门之（四）下载并安装MySQL数据库/">
-      <time datetime="2015-10-08T07:09:27.093Z" itemprop="datePublished">2015-10-08</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/SQL/">SQL</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在浏览器中输入MySQL官方地址www.mysql.com，选择页签”Downloads (GA)” =&gt; MySQL Community Edition（MySQL社区版本）。选择”Downloads (GA)”：<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/10/08/MySQL入门之（四）下载并安装MySQL数据库/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pangypeng/pangypeng.github.io/2015/10/08/MySQL入门之（四）下载并安装MySQL数据库/" data-id="cifhx3mme0006vwi9y1wftu22" class="article-share-link">分享到</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-MySQL入门之（三）MySQL关系型数据库" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-      <a class="article-gallery-img fancybox" href="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-08.jpg" rel="gallery_cifhx3mn1000nvwi93cbimlyc">
-        <img src="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-08.jpg" itemprop="image">
-      </a>
-    
-  </div>
-</div>
-
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/08/MySQL入门之（三）MySQL关系型数据库/">MySQL入门之（三）MySQL关系型数据库</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/MySQL入门之（三）MySQL关系型数据库/">
-      <time datetime="2015-10-08T06:57:21.474Z" itemprop="datePublished">2015-10-08</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/SQL/">SQL</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>MySQL是目前业内使用最广的开源免费关系型数据库。
-        
-          <p class="article-more-link">
-            <a href="/2015/10/08/MySQL入门之（三）MySQL关系型数据库/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pangypeng/pangypeng.github.io/2015/10/08/MySQL入门之（三）MySQL关系型数据库/" data-id="cifhx3mn1000nvwi93cbimlyc" class="article-share-link">分享到</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
-      </nav>
-    </section>
+</section>
       
         <aside id="sidebar">
   
