@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: SQL | Pang&#39;s Blog</title>
+  <title>第一行代码之Fragment | Pang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="你丫才程序猿">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Pang's Blog">
-<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/categories/SQL/index.html">
+  <meta name="description" content="Fragment（碎片）是Android3.0引入的全新概念，是一种可以嵌入到活动中的UI片段，为了更加合理和充分的利用大屏幕的空间，一般在平板上使用广泛。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一行代码之Fragment">
+<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/2016/05/05/第一行代码之Fragment/index.html">
 <meta property="og:site_name" content="Pang's Blog">
-<meta property="og:description" content="你丫才程序猿">
+<meta property="og:description" content="Fragment（碎片）是Android3.0引入的全新概念，是一种可以嵌入到活动中的UI片段，为了更加合理和充分的利用大屏幕的空间，一般在平板上使用广泛。">
+<meta property="og:image" content="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-02.jpg">
+<meta property="og:updated_time" content="2016-05-05T08:21:04.962Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pang's Blog">
-<meta name="twitter:description" content="你丫才程序猿">
+<meta name="twitter:title" content="第一行代码之Fragment">
+<meta name="twitter:description" content="Fragment（碎片）是Android3.0引入的全新概念，是一种可以嵌入到活动中的UI片段，为了更加合理和充分的利用大屏幕的空间，一般在平板上使用广泛。">
   
   
     <link rel="icon" href="favicon.png">
@@ -121,223 +123,167 @@
 </aside>
 
       
-      <section id="main">
-    <section class="archives-wrap">
-    <div class="archive-category-wrap">
-      <span class="archive-category">SQL</span>
-    </div>
-    <div class="archives">
+      <section id="main"><article id="post-第一行代码之Fragment" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
     
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/08/mycli-mysql的开源命令行接口/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-14.jpg)" alt="mycli ： mysql的开源命令行接口" class="thumbnail-image"></span>
-  
-</a>
-    </div>
+<div class="article-gallery">
+  <div class="article-gallery-photos">
     
-    <header class="archive-article-header">
-      
+      <a class="article-gallery-img fancybox" href="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-02.jpg" rel="gallery_cigqa8s4g0001fwi9t7601jaj">
+        <img src="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-02.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/08/mycli-mysql的开源命令行接口/">mycli ： mysql的开源命令行接口</a>
+    <h1 class="article-title" itemprop="name">
+      第一行代码之Fragment
     </h1>
   
 
-      
-        
-  <div class="archive-article-date">
+        <div class="article-meta">
+          
+  <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/mycli-mysql的开源命令行接口/">
-      <time datetime="2015-10-08T07:51:25.819Z" itemprop="datePublished">2015 10月 8</time>
+    <a href="/2016/05/05/第一行代码之Fragment/">
+      <time datetime="2016-05-05T08:21:04.962Z" itemprop="datePublished">2016-05-05</time>
     </a>
   </div>
 
 
-      
-    </header>
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
   </div>
-</article>
+
+        </div>
+      </header>
     
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/08/MySQL入门之（八）设置用户密码并删除匿名用户/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-13.jpg)" alt="MySQL入门之（八）设置用户密码并删除匿名用户" class="thumbnail-image"></span>
-  
-</a>
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>Fragment（碎片）是Android3.0引入的全新概念，是一种可以嵌入到活动中的UI片段，为了更加合理和充分的利用大屏幕的空间，一般在平板上使用广泛。</p>
+<a id="more"></a>
+<h3 id="Fragment的使用">Fragment的使用</h3><p>这里写一个最简单的Fragment测试项目，命名为FragmentTest，在一个活动中添加两个Fragment，并让这两个Fragment平分屏幕空间。</p>
+<ul>
+<li>创建一个充当Fragment的布局文件，命名为left_fragment.xml 。</li>
+</ul>
+<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="tag">&lt;<span class="title">LinearLayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span>
+    <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span> &gt;</span>
+<span class="tag">&lt;<span class="title">Button</span> 
+        <span class="attribute">android:id</span>=<span class="value">"@+id/button"</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_gravity</span>=<span class="value">"center_horizontal"</span>
+        <span class="attribute">android:text</span>=<span class="value">"Button"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+</code></pre><ul>
+<li>在建立一个 right_fragment.xml文件，将布局文件的背景设置为绿色。</li>
+</ul>
+<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="tag">&lt;<span class="title">LinearLayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span>
+    <span class="attribute">android:background</span>=<span class="value">"#00ff00"</span>
+    <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span> &gt;</span>
+
+    <span class="tag">&lt;<span class="title">TextView</span> 
+        <span class="attribute">android:id</span>=<span class="value">"@+id/text_view"</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_gravity</span>=<span class="value">"center_horizontal"</span>
+        <span class="attribute">android:textSize</span>=<span class="value">"20sp"</span>
+        <span class="attribute">android:text</span>=<span class="value">"This is right fragment"</span>/&gt;</span>
+
+<span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+</code></pre><ul>
+<li><p>自定义LeftFragment类继承Fragment,重写onCreate()方法，然后通过这个方法中的inflater将刚才建立的left_fragment.xml布局文件加载进来。</p>
+<pre><code>public <span class="class"><span class="keyword">class</span> <span class="title">LeftFragment</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Fragment</span> {</span>
+    <span class="annotation">@Override</span>
+    public <span class="type">View</span> onCreateView(<span class="type">LayoutInflater</span> inflater, <span class="type">ViewGroup</span> container, <span class="type">Bundle</span> savedInstanceState) {
+        <span class="type">View</span> view = inflater.inflate(<span class="type">R</span>.layout.left_fragment, container, <span class="literal">false</span>);
+        <span class="keyword">return</span> view;
+    }
+}
+</code></pre></li>
+</ul>
+<ul>
+<li><p>在创建RightFragment类继承Fragment，同样重写onCreate()方法，并加载布局文件</p>
+<pre><code>public <span class="class"><span class="keyword">class</span> <span class="title">RightFragment</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Fragment</span> {</span>
+    <span class="annotation">@Override</span>
+    public <span class="type">View</span> onCreateView(<span class="type">LayoutInflater</span> inflater, <span class="type">ViewGroup</span> container, <span class="type">Bundle</span> savedInstanceState) {
+        <span class="type">View</span> view = inflater.inflate(<span class="type">R</span>.layout.right_fragment, container, <span class="literal">false</span>);
+        <span class="keyword">return</span> view;
+    }
+}
+</code></pre></li>
+</ul>
+<ul>
+<li><p>修改activity_main.xml布局文件</p>
+<pre><code>&lt;LinearLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span>
+    xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span>
+    android:layout_width=<span class="string">"match_parent"</span>
+    android:layout_height=<span class="string">"match_parent"</span>
+     &gt;
+
+    &lt;fragment 
+        android:<span class="property">id</span>=<span class="string">"@+id/left_fragment"</span>
+        android:<span class="property">name</span>=<span class="string">"com.example.fragmenttest.LeftFragment"</span>
+        android:layout_width=<span class="string">"0dp"</span>
+        android:layout_height=<span class="string">"match_parent"</span>
+    android:layout_weight=<span class="string">"1"</span>
+        /&gt;
+
+     &lt;fragment 
+        android:<span class="property">id</span>=<span class="string">"@+id/right_fragment"</span>
+        android:<span class="property">name</span>=<span class="string">"com.example.fragmenttest.RifhtFragment"</span>
+        android:layout_width=<span class="string">"0dp"</span>
+        android:layout_height=<span class="string">"match_parent"</span>
+    android:layout_weight=<span class="string">"3"</span>
+        /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre></li>
+</ul>
+<p>这样简单的Fragment测试项目已经写好，运行项目，在平板中观察。</p>
+
+      
     </div>
-    
-    <header class="archive-article-header">
+    <footer class="article-footer">
+      <a data-url="https://github.com/pangypeng/pangypeng.github.io/2016/05/05/第一行代码之Fragment/" data-id="cigqa8s4g0001fwi9t7601jaj" class="article-share-link">分享到</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/08/MySQL入门之（八）设置用户密码并删除匿名用户/">MySQL入门之（八）设置用户密码并删除匿名用户</a>
-    </h1>
-  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fragment/">Fragment</a></li></ul>
 
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/MySQL入门之（八）设置用户密码并删除匿名用户/">
-      <time datetime="2015-10-08T07:39:43.184Z" itemprop="datePublished">2015 10月 8</time>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/08/mycli-mysql的开源命令行接口/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">mycli ： mysql的开源命令行接口</div>
     </a>
-  </div>
+  
+</nav>
 
 
-      
-    </header>
-  </div>
+  
 </article>
-    
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/08/MySQL入门之（七）启动客户端/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-12.jpg)" alt="MySQL入门之（七）启动客户端" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/08/MySQL入门之（七）启动客户端/">MySQL入门之（七）启动客户端</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/MySQL入门之（七）启动客户端/">
-      <time datetime="2015-10-08T07:27:12.793Z" itemprop="datePublished">2015 10月 8</time>
-    </a>
-  </div>
 
 
-      
-    </header>
-  </div>
-</article>
-    
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/08/MySQL入门之（六）启动服务器监听/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-11.jpg)" alt="MySQL入门之（六）启动服务器监听" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/08/MySQL入门之（六）启动服务器监听/">MySQL入门之（六）启动服务器监听</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/MySQL入门之（六）启动服务器监听/">
-      <time datetime="2015-10-08T07:21:51.720Z" itemprop="datePublished">2015 10月 8</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-    
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/08/MySQL入门之（五）创建配置文件/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-10.jpg)" alt="MySQL入门之（五）创建配置文件" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/08/MySQL入门之（五）创建配置文件/">MySQL入门之（五）创建配置文件</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/MySQL入门之（五）创建配置文件/">
-      <time datetime="2015-10-08T07:17:17.337Z" itemprop="datePublished">2015 10月 8</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-    
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/08/MySQL入门之（四）下载并安装MySQL数据库/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-09.jpg)" alt="MySQL入门之（四）下载并安装MySQL数据库" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/08/MySQL入门之（四）下载并安装MySQL数据库/">MySQL入门之（四）下载并安装MySQL数据库</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/08/MySQL入门之（四）下载并安装MySQL数据库/">
-      <time datetime="2015-10-08T07:09:27.093Z" itemprop="datePublished">2015 10月 8</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-    
-    </div></section>
-    
-      <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/categories/SQL/page/2/">2</a><a class="extend next" rel="next" href="/categories/SQL/page/2/">下一页 &raquo;</a>
-      </nav>
-    </section>
+</section>
       
         <aside id="sidebar">
   
