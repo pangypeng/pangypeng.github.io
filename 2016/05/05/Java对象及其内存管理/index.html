@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java对象及其内存管理 | Pang&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Java内存分配分为两种：
+
+内存分配：特指创建Java对象时JVM为该对象在堆内存中分配的内存空间。
+内存回收：当Java对象失去引用，编程垃圾时，JVM的垃圾回收机制自动清除该对象，并且回收该对象所占用的内存。
+
+由于JVM的垃圾回收机制由一条后台线程完成，本身也是非常消耗性能的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java对象及其内存管理">
+<meta property="og:url" content="https://github.com/pangypeng/pangypeng.github.io/2016/05/05/Java对象及其内存管理/index.html">
+<meta property="og:site_name" content="Pang's Blog">
+<meta property="og:description" content="Java内存分配分为两种：
+
+内存分配：特指创建Java对象时JVM为该对象在堆内存中分配的内存空间。
+内存回收：当Java对象失去引用，编程垃圾时，JVM的垃圾回收机制自动清除该对象，并且回收该对象所占用的内存。
+
+由于JVM的垃圾回收机制由一条后台线程完成，本身也是非常消耗性能的。">
+<meta property="og:image" content="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-10.jpg">
+<meta property="og:updated_time" content="2016-05-05T10:23:05.228Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java对象及其内存管理">
+<meta name="twitter:description" content="Java内存分配分为两种：
+
+内存分配：特指创建Java对象时JVM为该对象在堆内存中分配的内存空间。
+内存回收：当Java对象失去引用，编程垃圾时，JVM的垃圾回收机制自动清除该对象，并且回收该对象所占用的内存。
+
+由于JVM的垃圾回收机制由一条后台线程完成，本身也是非常消耗性能的。">
+  
+  
+    <link rel="icon" href="favicon.png">
+  
+  
+ <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+ <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Pang&#39;s Blog</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="https://github.com/pangypeng/pangypeng.github.io"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/.">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="https://github.com/pangypeng/pangypeng.github.io"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">pang</h2>
+      <h3 id="title">我心中有蠢驴细嗅蔷薇...</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>JiangMen, China</span>
+      <a id="follow" href="https://github.com/pangypeng/">关注我</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        19
+        <span>文章</span>
+      </div>
+      <div class="article-info-block">
+        9
+        <span>标签</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/pangypeng/pangypeng.github.io" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+          
+          <td><a href="/#" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
+          
+          <td><a href="/#" target="_blank" title="dribbble"><i class="fa fa-dribbble"></i></a></td>
+          
+          <td><a href="/#" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-Java对象及其内存管理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-10.jpg" rel="gallery_cinu3z7bh0000eos6yjafn6o3">
+        <img src="http://7xn9sb.com1.z0.glb.clouddn.com/github-io-10.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java对象及其内存管理
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/05/05/Java对象及其内存管理/">
+      <time datetime="2016-05-05T09:46:42.000Z" itemprop="datePublished">2016-05-05</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>Java内存分配分为两种：</p>
+<ul>
+<li>内存分配：特指创建Java对象时JVM为该对象在堆内存中分配的内存空间。</li>
+<li>内存回收：当Java对象失去引用，编程垃圾时，JVM的垃圾回收机制自动清除该对象，并且回收该对象所占用的内存。</li>
+</ul>
+<p>由于JVM的垃圾回收机制由一条后台线程完成，本身也是非常消耗性能的。<br><a id="more"></a></p>
+<h2 id="实例变量和类变量">实例变量和类变量</h2><p>Java程序的变量大体可以分为成员变量和局部变量。其中局部变量又可以分为三种：</p>
+<ul>
+<li>形参：在方法签名中定义的局部变量，由方法调用者负责为其赋值，随方法的结束而消亡。</li>
+<li>方法内的局部变量：初始化时必须在方法内部对其显示赋值，生命周期与方法的相同。</li>
+<li>代码块内的局部变量：必须在代码块内对其显示初始化，生命周期与代码块的相同。</li>
+</ul>
+<p><strong>局部变量的作用时间很短，它们被存储在栈内存中。</strong></p>
+<p>类内定义的变量被称作成员变量，如果该成员变量定义是没有使用 <code>static</code> 修饰，该成员变量又被称为非静态变量或者实例变量；如果使用了 static 修饰，该成员变量又被称为静态变量或者类变量。</p>
+<ul>
+<li><p>对于static而言，从词意上看是“静态”的意思；从Java程序的角度来看，static是一个标志，static的作用就是将实例变量转换为类变量。</p>
+</li>
+<li><p>static只能修饰类里定义的成员部分，包括成员变量、方法、内部类（枚举或者接口）、代码块。如果没有 static 修改这些成员，这些成员属于该类的实例；如果使用 static 修饰，则这些成员属于该类本身。</p>
+</li>
+</ul>
+<p>一般Java没有要求定义变量要有先后顺序，但要保证前向引用的正确性，即在使用一个变量是必须确保该变量已经被定义。</p>
+<pre><code><span class="keyword">int</span> a = b + <span class="number">12</span>;
+<span class="keyword">int</span> b;
+</code></pre><p>因此在编译上面程序时提醒“非法前向引用”。<br>但是如果一个是类变量一个是实例变量，则实例变量总是可以应用类变量：</p>
+<pre><code><span class="keyword">int</span> num = num2 + <span class="number">2</span>;
+<span class="keyword">static</span> <span class="keyword">int</span> num2 = <span class="number">2</span>;
+</code></pre><p>因为static修饰的成员变量属于类，类变量会随着类的初始化得到初始化。而实例变量是随着对象的初始化而初始化。在初始化一个对象之前，肯定会初始化该对象所属的类。</p>
+<h2 id="实例变量和类变量的属性">实例变量和类变量的属性</h2><p>在同一个JVM中，每个类只对应一个 Class 对象，但每个类可以创建对个 Java 对象。由于同一个JVM中每个类对应一个 Class 对象，因此同一个 JVM 内的一个类的类变量只需一块内存空间。但是对于实例变量而言，该类每创建一个实例对象，就需要为实例变量分配一块内存空间，即堆内存中有几个实例对象，实例变量就需要几块内存空间。</p>
+<ul>
+<li>所有的类都是 Class 类的实例。每个类初始完成后，系统就会为该类创建一个对应的 Class 实例，程序可以通过反射来获取某个类对应的 Class 实例，例如要获取 Person 类对应的 Class 实例，通过 Person.class 或者 Class.forName(“Person”);</li>
+</ul>
+<h2 id="实例变量的初始化时机">实例变量的初始化时机</h2><p>对应实例变量而言，它属于java对象。</p>
+<ul>
+<li>从程序的运行角度来看，每次程序创建Java对象时就需要为实例变量分配内存空间，并对实例变量执行初始化。</li>
+<li>从语法角度来看，程序可以在三个地方对实例变量执行初始化：<ol>
+<li>定义实例变量是指定初始值</li>
+<li>非静态代码块中对实例变量指定初始值</li>
+<li>构造函数中对实例变量指定初始值</li>
+</ol>
+</li>
+</ul>
+<p>其中前两中种方式比第三种更早执行。但前两种方式的执行顺序与它们在代码中的顺序有关。</p>
+<pre><code><span class="keyword">class</span> <span class="title">Cat</span>{
+    String name;
+    <span class="keyword">int</span> age;
+    <span class="comment">// 静态代码块属于类，该类初始时就会执行</span>
+    <span class="keyword">static</span>{
+        System.<span class="keyword">out</span>.println(<span class="string">"执行静态代码块"</span>);
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="title">Cat</span>(<span class="params">String name,<span class="keyword">int</span> age</span>)</span>{
+        System.<span class="keyword">out</span>.println(<span class="string">"执行构造函数"</span>);
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.age = age;
+    }
+    <span class="comment">/**
+    * 定义实例变量时指定初始值和在非静态代码块中指定初始值的执行优先级是相同的。与它们在代码中的顺序有关。
+    * 可能会有如果非静态代码块先执行的话，weight = 2.0; 该句代码没有指定数据类型，编译不会报错吗的疑虑？
+    * 其实在编译时，编译器会想将实例变量提出：
+    *    即先从 double weight = 2.3; 提出 double weight;
+    *    然后执行 weight = 2.0;
+    *    最后执行 weight = 2.3;
+    */</span>
+
+    {
+        System.<span class="keyword">out</span>.println(<span class="string">"执行非静态代码块"</span>);
+        weight = <span class="number">2.0</span>;
+    }
+
+    <span class="keyword">double</span> weight = <span class="number">2.3</span>;
+
+    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span>(<span class="params"></span>)</span>{
+        <span class="keyword">return</span> <span class="string">"Cat[ name="</span>+name+<span class="string">",age="</span>+age+<span class="string">",weight="</span>+weight+<span class="string">"]"</span>;
+    }
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">InitTest</span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span>{
+        Cat cat = <span class="keyword">new</span> Cat(<span class="string">"Kitty"</span>,<span class="number">20</span>);
+        System.<span class="keyword">out</span>.println(cat.toString());
+    }
+}
+</code></pre><p>执行结果为：</p>
+<pre><code>---------- java ----------
+执行静态代码块
+执行非静态代码块
+执行构造函数
+Cat[ name=Kitty,age=<span class="number">20</span>,weight=<span class="number">2.3</span>]
+
+输出完成 (耗时 <span class="number">0</span> 秒) - 正常终止
+</code></pre><p>如何证明在编译的时候JVM会提出实例变量：其实jdk提供了javap 工具可以查看编译的机制。语法如下;</p>
+<pre><code>javap <span class="tag">&lt;<span class="title">options</span>&gt;</span> <span class="tag">&lt;<span class="title">classes</span>&gt;</span>...
+</code></pre><p>该工具有如下常用操作：</p>
+<ul>
+<li>-c ：分解方法代码，也就是显示每个方法具体的字节码</li>
+<li>-l ：用于指定显示行号和局部变量列表</li>
+<li>-public|protected|package|private ：用于指定显示哪种级别的类成员，分别对应java的四种访问控制权限</li>
+<li>-verbose ：用于指定显示更进一步的详细信息</li>
+</ul>
+<p>对于上面的程序，执行如下语句：</p>
+<pre><code><span class="title">javap</span> -c Cat
+</code></pre><p>输出的结果为：</p>
+<pre><code>Compiled from <span class="string">"InitTest.java"</span>
+<span class="keyword">class</span> Cat {
+
+  java.lang.String name;
+  <span class="keyword">int</span> age;
+ <span class="keyword">double</span> weight;
+
+ <span class="function"><span class="keyword">public</span> <span class="title">Cat</span><span class="params">(java.lang.String, <span class="keyword">int</span>)</span></span>;
+Code:
+   <span class="number">0</span>: aload_0
+   <span class="number">1</span>: invokespecial <span class="preprocessor">#<span class="number">1</span>    <span class="comment">// Method java/lang/Object."&lt;init&gt;":()V</span></span>
+   <span class="number">4</span>: getstatic     <span class="preprocessor">#<span class="number">2</span>    <span class="comment">// Field java/lang/System.out:Ljava/io/PrintStream;</span></span>
+   <span class="number">7</span>: ldc           <span class="preprocessor">#<span class="number">3</span>    <span class="comment">// String 执行非静态代码块</span></span>
+   <span class="number">9</span>: invokevirtual <span class="preprocessor">#<span class="number">4</span>    <span class="comment">// Method java/io/PrintStream.println:(Ljava/lang/String;)V</span></span>
+  <span class="number">12</span>: aload_0
+  <span class="number">13</span>: ldc2_w        <span class="preprocessor">#<span class="number">5</span>    <span class="comment">// double 2.0d</span></span>
+  <span class="number">16</span>: putfield      <span class="preprocessor">#<span class="number">7</span>    <span class="comment">// Field weight:D</span></span>
+  <span class="number">19</span>: aload_0
+  <span class="number">20</span>: ldc2_w        <span class="preprocessor">#<span class="number">8</span>    <span class="comment">// double 2.3d</span></span>
+  <span class="number">23</span>: putfield      <span class="preprocessor">#<span class="number">7</span>    <span class="comment">// Field weight:D</span></span>
+  <span class="number">26</span>: getstatic     <span class="preprocessor">#<span class="number">2</span>    <span class="comment">// Field java/lang/System.out:Ljava/io/PrintStream;</span></span>
+  <span class="number">29</span>: ldc           <span class="preprocessor">#<span class="number">10</span>   <span class="comment">// String 执行构造函数</span></span>
+  <span class="number">31</span>: invokevirtual <span class="preprocessor">#<span class="number">4</span>    <span class="comment">// Method java/io/PrintStream.println:(Ljava/lang/String;)V</span></span>
+  <span class="number">34</span>: aload_0
+  <span class="number">35</span>: aload_1
+  <span class="number">36</span>: putfield      <span class="preprocessor">#<span class="number">11</span>   <span class="comment">// Field name:Ljava/lang/String;</span></span>
+  <span class="number">39</span>: aload_0
+  <span class="number">40</span>: iload_2
+  <span class="number">41</span>: putfield      <span class="preprocessor">#<span class="number">12</span>   <span class="comment">// Field age:I</span></span>
+  <span class="number">44</span>: <span class="keyword">return</span>
+
+  <span class="keyword">public</span> java.lang.<span class="function">String <span class="title">toString</span><span class="params">()</span></span>;
+Code:
+   <span class="number">0</span>: <span class="keyword">new</span>           <span class="preprocessor">#<span class="number">13</span>     <span class="comment">// class java/lang/StringBuilder</span></span>
+   <span class="number">3</span>: dup
+   <span class="number">4</span>: invokespecial <span class="preprocessor">#<span class="number">14</span>     <span class="comment">// Method java/lang/StringBuilder."&lt;init&gt;":()V</span></span>
+   <span class="number">7</span>: ldc           <span class="preprocessor">#<span class="number">15</span>     <span class="comment">// String Cat[ name=</span></span>
+   <span class="number">9</span>: invokevirtual <span class="preprocessor">#<span class="number">16</span>     <span class="comment">// Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span></span>
+  <span class="number">12</span>: aload_0
+  <span class="number">13</span>: getfield      <span class="preprocessor">#<span class="number">11</span>    <span class="comment">// Field name:Ljava/lang/String;</span></span>
+  <span class="number">16</span>: invokevirtual <span class="preprocessor">#<span class="number">16</span>    <span class="comment">// Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span></span>
+  <span class="number">19</span>: ldc           <span class="preprocessor">#<span class="number">17</span>    <span class="comment">// String ,age=</span></span>
+  <span class="number">21</span>: invokevirtual <span class="preprocessor">#<span class="number">16</span>    <span class="comment">// Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span></span>
+  <span class="number">24</span>: aload_0
+  <span class="number">25</span>: getfield      <span class="preprocessor">#<span class="number">12</span>    <span class="comment">// Field age:I</span></span>
+  <span class="number">28</span>: invokevirtual <span class="preprocessor">#<span class="number">18</span>    <span class="comment">// Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;</span></span>
+  <span class="number">31</span>: ldc           <span class="preprocessor">#<span class="number">19</span>    <span class="comment">// String ,weight=</span></span>
+  <span class="number">33</span>: invokevirtual <span class="preprocessor">#<span class="number">16</span>    <span class="comment">// Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span></span>
+  <span class="number">36</span>: aload_0
+  <span class="number">37</span>: getfield      <span class="preprocessor">#<span class="number">7</span>     <span class="comment">// Field weight:D</span></span>
+  <span class="number">40</span>: invokevirtual <span class="preprocessor">#<span class="number">20</span>    <span class="comment">// Method java/lang/StringBuilder.append:(D)Ljava/lang/StringBuilder;</span></span>
+  <span class="number">43</span>: ldc           <span class="preprocessor">#<span class="number">21</span>    <span class="comment">// String ]</span></span>
+  <span class="number">45</span>: invokevirtual <span class="preprocessor">#<span class="number">16</span>    <span class="comment">// Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span></span>
+  <span class="number">48</span>: invokevirtual <span class="preprocessor">#<span class="number">22</span>    <span class="comment">// Method java/lang/StringBuilder.toString:()Ljava/lang/String;</span></span>
+  <span class="number">51</span>: areturn
+
+  <span class="keyword">static</span> {};
+Code:
+   <span class="number">0</span>: getstatic     <span class="preprocessor">#<span class="number">2</span>                  <span class="comment">// Field java/lang/System.out:Ljava/io/PrintStream;</span></span>
+   <span class="number">3</span>: ldc           <span class="preprocessor">#<span class="number">23</span>                 <span class="comment">// String 执行静态代码块</span></span>
+   <span class="number">5</span>: invokevirtual <span class="preprocessor">#<span class="number">4</span>                  <span class="comment">// Method java/io/PrintStream.println:(Ljava/lang/String;)V</span></span>
+   <span class="number">8</span>: <span class="keyword">return</span>
+}
+</code></pre><p>从执行结果可以发现，在编译时，JVM会把类中的实例变量提取出来，然后统一在构造函数中初始化，初始化顺序是，先是定义实例变量时指定初始值、在非静态代码块中指定初始值，后是在构造函数中指定初始值。而定义实例变量时指定初始值和在非静态代码块中指定初始值的执行顺序与它们在代码中的顺序有关。由此也可知构造函数只是负责对Java对象实例变量执行初始化（即赋初始值），而在构造函数执行之前，该对象所占的内存已经被分配出来了，也就是这些实例变量都分配了内存空间，且被赋了默认值。</p>
+<h2 id="类变量的初始化时机">类变量的初始化时机</h2><p>对应类变量，它属于Java类本身。</p>
+<ul>
+<li>从程序运行的角度：在同一JVM中，每个Java类只初始化一次，因此只有在每次运行Java程序时，才会初始化Java类，才会为该类的类变量分配内存空间，并执行初始化。</li>
+<li>从语法角度：程序可以在两个地方对类变量执行初始化。<ol>
+<li>定义类变量是指定初始值</li>
+<li>静态代码块中对类变量指定初始值</li>
+</ol>
+</li>
+</ul>
+<p>这两种方式与它们在代码中的顺序有关</p>
+<pre><code><span class="keyword">class</span> StaticDemo {
+
+    <span class="keyword">static</span> <span class="keyword">int</span> b;
+
+    <span class="keyword">static</span> {
+        b = <span class="number">4</span>;
+    }
+    <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">2</span>;
+}
+</code></pre><p>使用javap工具查看编译情况：</p>
+<pre><code><span class="title">javap</span> -c StaticDemo
+</code></pre><p>执行结果为：</p>
+<pre><code>E:\Java\test&gt;javap -c StaticDemo
+Compiled from <span class="string">"StaticDemo.java"</span>
+<span class="keyword">class</span> StaticDemo {
+  <span class="keyword">static</span> <span class="keyword">int</span> b;
+  <span class="keyword">static</span> <span class="keyword">int</span> a;
+
+  StaticDemo();
+    Code:
+       <span class="number">0</span>: aload_0
+       <span class="number">1</span>: invokespecial <span class="preprocessor">#<span class="number">1</span>                  <span class="comment">// Method java/lang/Object."&lt;init&gt;":()V</span></span>
+       <span class="number">4</span>: <span class="keyword">return</span>
+
+  <span class="keyword">static</span> {};
+    Code:
+       <span class="number">0</span>: iconst_4
+       <span class="number">1</span>: putstatic     <span class="preprocessor">#<span class="number">2</span>                  <span class="comment">// Field b:I</span></span>
+       <span class="number">4</span>: iconst_2
+       <span class="number">5</span>: putstatic     <span class="preprocessor">#<span class="number">3</span>                  <span class="comment">// Field a:I</span></span>
+       <span class="number">8</span>: <span class="keyword">return</span>
+}
+</code></pre><p>从执行结果可以发现，在编译时，JVM将定义类变量先提取出来，然后统一在静态代码块中初始化。初始化的顺序与代码顺序相同。即不论在定义类变量是初始值还是在静态代码块中初始值，系统默认都会在静态代码块中初始值。而静态代码块先于构造函数执行。</p>
+<pre><code><span class="keyword">class</span> <span class="title">Price</span> {
+    <span class="comment">// 类变量是 Price 的实例</span>
+    final <span class="keyword">static</span> Price INSTANCE = <span class="keyword">new</span> Price(<span class="number">2.8</span>);
+    <span class="comment">// 定义类变量并赋初始值</span>
+    <span class="keyword">static</span> <span class="keyword">double</span> initPrice = <span class="number">20</span>;
+    <span class="keyword">double</span> currentPrice;
+    <span class="function"><span class="keyword">public</span> <span class="title">Price</span>(<span class="params"><span class="keyword">double</span> discount</span>)</span>{
+        currentPrice = initPrice - discount;
+    }
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">StaticInitTest</span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span>{
+        <span class="comment">/* 通过Price的INSTANCE访问currentPrice
+         *    执行 Price.INSTANCE 后就会调用构造函数，执行代码，此时 initPrice 还没与执行，默认值为0
+         *
+         */</span>
+        System.<span class="keyword">out</span>.println(Price.INSTANCE.currentPrice);<span class="comment">// -2.8</span>
+        <span class="comment">/* 通过Price类的实例来访问
+         *    执行 Price p = new Price(2.8); 时，系统已经初始化完成所有类变量，initPrice 已经被赋值为20
+         * 
+         */</span>
+        Price p = <span class="keyword">new</span> Price(<span class="number">2.8</span>);
+        System.<span class="keyword">out</span>.println(p.currentPrice); <span class="comment">// 17.2</span>
+    }
+}
+</code></pre><h2 id="父类构造器">父类构造器</h2><p>当创建任何Java对象时，程序总会先依次调用父类的非静态代码块、构造函数执行初始化，然后才调用本类的非静态代码块、构造函数。</p>
+<p>当调用某个类的构造器来创建Java对象时，系统总会调用父类的非静态代码块进行初始化。这个调用时隐式执行的，而且父类的非静态代码块总会执行。接着会调用父类的一个或多个构造函数，这个调用既可以通过 super 显示调用，也可以隐式调用。当父类的非静态代码块、构造函数执行完成后，系统后调用该类本身的非静态代码块 、构造函数，最后返回本类的实例。</p>
+<p>至于调用父类的哪个构造函数，有如下几种情况：</p>
+<ul>
+<li>子类构造函数中第一行代码使用 super() 函数显示调用父类的构造函数，根据 super() 函数的参数调用父类对应的构造函数。</li>
+<li>子类构造函数的第一行代码使用 this() 函数显示本身的其他构造函数，有其他构造函数显示调用父类的对应构造函数</li>
+<li>子类构造函数既没有调用 super()　没有调用　this() ，则系统会隐式调用父类的无参构造函数</li>
+</ul>
+<pre><code><span class="keyword">class</span>  <span class="title">Parent</span>{
+    <span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">2</span>;
+    {
+        System.<span class="keyword">out</span>.println(<span class="string">"Parent的非静态代码块执行了"</span>);
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="title">Parent</span>(<span class="params"></span>)</span>{
+        <span class="comment">/**
+        * 子类与父类中的同名实例变量不会被认为是重写，虽然名字相同，但分别属于不同的类
+        * 此处输出 2 是因为在程序运行时JVM会为 Sub 分配两块栈内存，
+        *    一块用来存储 Parent类的实例变量
+        *   一块用来存储 Sub类的实例变量，
+        * this的编译时类型和运行时类型不一样
+        * 通过this访问它所引用的对象的实例变量是，该实例变量的值由声明该变量的类型决定
+        * 通过this访问它所引用的对象的实例方法时，该方法的行文将由它实际引用的对象来决定
+        * 此处this的类型是 Parent，但实际的应用对象时 Sub。
+        * 怎么理解呢？this在构造函数中，则this代表该类的Java对象，则类型就是该类。
+        *           但是此处Parent的构造函数时在 Sub的构造函数中调用的，则this的实际引用对象是Sub的实例对象
+        */</span>
+        System.<span class="keyword">out</span>.println(<span class="string">"Parent构造函数执行了"</span>+<span class="keyword">this</span>.i);
+        <span class="comment">/**
+        * 在编译期，this代表当前类的实例对象，执行 this.display() 方法，因为当前类有 display 方法编译通过
+        * 在运行期，this代表的实例对象会根据具体的引用而不同，比如此处this在运行期代表的是子类 sub 的
+        *  实例对象。
+        */</span>
+        System.<span class="keyword">out</span>.println(<span class="string">"****parent****  "</span>+<span class="keyword">this</span>);<span class="comment">// 此处的this是 sub 类的对象</span>
+        <span class="keyword">this</span>.display();<span class="comment">// 调用子类的的 display() </span>
+        <span class="comment">// 无法通过编译，因为this的编译类型是 parent，但是parent中没有 show方法</span>
+        <span class="comment">//this.show();</span>
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span>(<span class="params"></span>)</span>{
+        System.<span class="keyword">out</span>.println(<span class="string">"****parent****  "</span>+ i);
+    }
+}
+
+<span class="keyword">class</span> <span class="title">Sub</span> <span class="title">extends</span> <span class="title">Parent</span>{
+    <span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">22</span>;
+    {
+        System.<span class="keyword">out</span>.println(<span class="string">"Sub的非静态代码块执行了"</span>);
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="title">Sub</span>(<span class="params"></span>)</span>{
+        <span class="comment">// 隐式调用了父类的无参构造函数</span>
+        System.<span class="keyword">out</span>.println(<span class="string">"Sub构造函数执行了"</span>+<span class="keyword">this</span>.i);
+        i = <span class="number">222</span>;
+        <span class="keyword">this</span>.display();
+    }
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span>(<span class="params"></span>)</span>{
+        System.<span class="keyword">out</span>.println(<span class="string">"+++++sub display i +++++  "</span>+ i);
+        System.<span class="keyword">out</span>.println(<span class="string">"+++++sub display a +++++  "</span>+ i);
+    }
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span>(<span class="params"></span>)</span>{
+        System.<span class="keyword">out</span>.println(<span class="string">"****sub show****  "</span>+ i);
+    }
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ParentTest</span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span>{
+        <span class="keyword">new</span> Sub();
+    }
+}    
+</code></pre><p>执行结果为：</p>
+<pre><code>---------- java ----------
+Parent的非静态代码块执行了2
+Parent构造函数执行了
+<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>parent<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>  Sub<span class="comment">@4f57011e</span>
++++++sub display i +++++  0
++++++sub display a +++++  0
+Sub的非静态代码块执行了22
+Sub构造函数执行了
++++++sub display+++++  222
+
+输出完成 (耗时 0 秒) - 正常终止
+</code></pre><h2 id="访问子类对象的实例变量和重写父类的方法">访问子类对象的实例变量和重写父类的方法</h2><p>子类的方法可以访问父类的实例变量（访问权限允许时），这是因为子类继承父类就会获得父类的成员变量和方法；但是父类方法无法访问子类的实例变量，因为在父类实例化时子类还不存在，故父类无法知道子类有哪些成员变量和方法。</p>
+<p>但是在极端的情况下也会存在父类访问子类的变量的情况。在上面的例子中，程序运行到Parent类的构造函数时，执行 this.display() 会调用 Sub类的 display 方法。因为当 this 在构造函数时，this 代表正在执行初始化的Java对象。那么此时的this应该是 Parent 类的实例对象，但是 Parent 的构造函数是在子类的构造函数中执行的，故此时 this 的实际引用对象应该是 Sub 类的实例对象。</p>
+<p>通过上面的例子可以看到一个变量的编译时类型和运行时类型会不一样。若不一样时，通过该变量访问它所引用的对象的实例变量时，该实例变量的值由声明该变量的类型决定；通过该变量访问它所引用的对象的实例方法时，该方法的行文将由它实际引用的对象来决定。（具体原因看父子实例的内存控制）</p>
+<ul>
+<li>如果父类构造函数调用了子类重写的方法，且通过子类构造函数来创建子类对象，调用了这个父类的构造函数，就会导致子类的重写方法在子类的构造函数之前执行，会出现子类的重写方法访问不到子类的实例变量的情形。</li>
+</ul>
+<h2 id="父子实例的内存控制">父子实例的内存控制</h2><h3 id="继承成员变量和继承方法的区别">继承成员变量和继承方法的区别</h3><p>在访问权限允许的情况下，子类可以获得父类的全部方法，但对于成员变量则不会继承。</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> {</span>
+    public <span class="type">String</span> name;
+    public void info(){
+        <span class="type">System</span>.out.println(name);
+    }
+}
+
+public <span class="class"><span class="keyword">class</span> <span class="title">Wolf</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Animal</span>{</span>
+    <span class="keyword">private</span> double weight;
+}
+</code></pre><p>上面程序中，Wolf继承自Animal类，因此它会获得Animal类中声明的成员变量和方法。使用javap工具分析 Wolf 类：</p>
+<pre><code>javap -c -<span class="keyword">private</span> Wolf
+</code></pre><p>得到的结果为：</p>
+<pre><code>E:\Java\test&gt;javap -c -<span class="keyword">private</span> Wolf
+Compiled from <span class="string">"Wolf.java"</span>
+<span class="keyword">public</span> <span class="keyword">class</span> Wolf extends Animal {
+  <span class="keyword">private</span> <span class="keyword">double</span> weight;
+
+  <span class="function"><span class="keyword">public</span> <span class="title">Wolf</span><span class="params">()</span></span>;
+    Code:
+       <span class="number">0</span>: aload_0
+       <span class="number">1</span>: invokespecial <span class="preprocessor">#<span class="number">1</span>                  <span class="comment">// Method Animal."&lt;init&gt;":()V</span></span>
+       <span class="number">4</span>: <span class="keyword">return</span>
+
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span></span>;
+    Code:
+       <span class="number">0</span>: aload_0
+       <span class="number">1</span>: invokespecial <span class="preprocessor">#<span class="number">2</span>                  <span class="comment">// Method Animal.info:()V</span></span>
+       <span class="number">4</span>: <span class="keyword">return</span>
+}
+</code></pre><p>可以看出，Wolf继承Animal类时，编译器会将Animal类中的 void info() 方法转移到Wolf类中，即Wolf类中默认会有一个 void info() 方法。当然也可以显示声明该方法，则子类会重写父类的方法（父类该方法中的代码逻辑失效）。而Animal类中的成员变量则没有转移到Wolf类中。</p>
+<ul>
+<li>只有当子类声明为 public 而父类不是使用 public 修饰时才可以通过 javap 工具看到编译器将父类的方法转移到了子类。</li>
+</ul>
+<p>如果子类重写了父类的方法，就意味着子类的方法完全覆盖了父类里的同名方法，编译器将不会再把父类的方法转移到子类。对于实例变量则不存在这种现象，即使子类中定义了与父类完全同名的实例变量，这个实例变量也不可能覆盖父类中定义的实例变量。</p>
+<p>因为继承成员变量和继承方法之间存在这样的差别，所以对于一个引用类型的变量而言，当通过该变量访问它所引用的对象的实例变量时，该实例变量的值取决于声明该变量时的类型；当通过该变量调用它所引用的对象的方法时，该方法行为取决于它所实际引用的对象的类型。</p>
+<h3 id="内存中子类实例">内存中子类实例</h3><p>当程序创建一个类对象时，系统不仅会为该类中定义的实例变量分配内存，也会为其父类中定义的实例变量分配内存，即使子类定义了与父类同名的实例变量。</p>
+<p>如果子类中定义了与父类同名的实例变量，那么通过子类引用对象的变量访问实例变量永远得到的是子类的实例变量的值，为了在子类访问父类中定义的实例变量，可以使用 <code>super.</code> 作为限定来修饰这些实例变量和实例方法。</p>
+<h3 id="父、子类的类变量">父、子类的类变量</h3><h2 id="final修饰符">final修饰符</h2><p>final修饰符的功能：</p>
+<ul>
+<li>final可以修饰变量，被final修饰的变量被赋初始值后，不能对它重新赋值</li>
+<li>final可以修饰方法，被final修饰的方法不能被重写。</li>
+<li>final可以修饰类，被final修饰的类不能派生子类。</li>
+</ul>
+<h3 id="final修饰变量">final修饰变量</h3><p><strong>被final修饰的实例变量</strong>必须显示赋初始值，且只能在三个地方指定初始值：</p>
+<ul>
+<li>定义final实例变量是指定初始值</li>
+<li>在非静态代码块中为final实例变量指定初始值</li>
+<li>在构造函数中为final实例变量指定初始值</li>
+</ul>
+<p>对于普通的实例变量可以在定义时赋初始值，亦可以让系统赋默认值。被final修饰的实例变量已被称为常量，必须显示赋初始值</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">FinalInstanceVariableTest</span></span>{
+    <span class="keyword">final</span> <span class="keyword">int</span> var1 = <span class="number">666</span>;
+    <span class="keyword">final</span> <span class="keyword">int</span> var2 ;
+    {
+        var2 = <span class="number">777</span>;
+    }
+    <span class="keyword">final</span> <span class="keyword">int</span> var3;
+    <span class="function"><span class="keyword">public</span> <span class="title">FinalInstanceVariableTest</span><span class="params">()</span></span>{
+        var3 = <span class="number">888</span>;
+    }
+}
+</code></pre><p>使用 javap 工具查看编译情况：</p>
+<pre><code><span class="title">javap</span> -c FinalInstanceVariableTest
+</code></pre><p>执行结果为：</p>
+<pre><code>E:\Java\test&gt;javap -c FinalInstanceVariableTest
+Compiled from <span class="string">"FinalInstanceVariableTest.java"</span>
+<span class="keyword">class</span> FinalInstanceVariableTest {
+  final <span class="keyword">int</span> var1;
+
+  final <span class="keyword">int</span> var2;
+
+  final <span class="keyword">int</span> var3;
+
+  <span class="function"><span class="keyword">public</span> <span class="title">FinalInstanceVariableTest</span><span class="params">()</span></span>;
+    Code:
+       <span class="number">0</span>: aload_0
+       <span class="number">1</span>: invokespecial <span class="preprocessor">#<span class="number">1</span>                  <span class="comment">// Method java/lang/Object."&lt;init&gt;":()V</span></span>
+       <span class="number">4</span>: aload_0
+       <span class="number">5</span>: sipush        <span class="number">666</span>
+       <span class="number">8</span>: putfield      <span class="preprocessor">#<span class="number">2</span>                  <span class="comment">// Field var1:I</span></span>
+      <span class="number">11</span>: aload_0
+      <span class="number">12</span>: sipush        <span class="number">777</span>
+      <span class="number">15</span>: putfield      <span class="preprocessor">#<span class="number">3</span>                  <span class="comment">// Field var2:I</span></span>
+      <span class="number">18</span>: aload_0
+      <span class="number">19</span>: sipush        <span class="number">888</span>
+      <span class="number">22</span>: putfield      <span class="preprocessor">#<span class="number">4</span>                  <span class="comment">// Field var3:I</span></span>
+      <span class="number">25</span>: <span class="keyword">return</span>
+}
+</code></pre><p>从结果可以看出，三种初始值的方式都会被抽取到构造函数中执行。</p>
+<ul>
+<li>final实例变量必须显示赋初始值，且本质final实例变量只能在构造函数中被赋初始值。final实例变量的三种赋初始值方式的执行顺序与普通实例变量的相同。</li>
+</ul>
+<p><strong>被final修饰的类变量</strong>也必须显示地指定初始值，而且final类变量只能在俩个地方指定初始值：</p>
+<ol>
+<li>定义final类变量时指定初始值</li>
+<li><p>在静态代码块中为final类变量指定初始值</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">FinalClassVariableTest</span> </span>{
+    <span class="comment">// 编译时无法确定 a 的准确取值</span>
+    <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="string">"final类变量"</span>.length();
+    <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> b ;
+    <span class="keyword">static</span>{
+        b = <span class="string">"final实例变量"</span>.length();
+    }
+}
+</code></pre></li>
+</ol>
+<p>使用 javap 查看编译情况：</p>
+<pre><code>javap -c <span class="class"><span class="keyword">class</span> <span class="title">FinalClassVariableTest</span></span>
+</code></pre><p>执行结果为：</p>
+<pre><code>E:\Java\test&gt;javap -c FinalClassVariableTest
+Compiled from <span class="string">"FinalClassVariableTest.java"</span>
+<span class="keyword">class</span> FinalClassVariableTest {
+  <span class="keyword">static</span> final <span class="keyword">int</span> a;
+
+  <span class="keyword">static</span> final <span class="keyword">int</span> b;
+
+  FinalClassVariableTest();
+    Code:
+       <span class="number">0</span>: aload_0
+       <span class="number">1</span>: invokespecial <span class="preprocessor">#<span class="number">1</span>                  <span class="comment">// Method java/lang/Object."&lt;init&gt;":()V</span></span>
+       <span class="number">4</span>: <span class="keyword">return</span>
+
+  <span class="keyword">static</span> {};
+    Code:
+       <span class="number">0</span>: ldc           <span class="preprocessor">#<span class="number">2</span>                  <span class="comment">// String final类变量</span></span>
+       <span class="number">2</span>: invokevirtual <span class="preprocessor">#<span class="number">3</span>                  <span class="comment">// Method java/lang/String.length:()I</span></span>
+       <span class="number">5</span>: putstatic     <span class="preprocessor">#<span class="number">4</span>                  <span class="comment">// Field a:I</span></span>
+       <span class="number">8</span>: ldc           <span class="preprocessor">#<span class="number">5</span>                  <span class="comment">// String final实例变量</span></span>
+      <span class="number">10</span>: invokevirtual <span class="preprocessor">#<span class="number">3</span>                  <span class="comment">// Method java/lang/String.length:()I</span></span>
+      <span class="number">13</span>: putstatic     <span class="preprocessor">#<span class="number">6</span>                  <span class="comment">// Field b:I</span></span>
+      <span class="number">16</span>: <span class="keyword">return</span>
+}
+</code></pre><p>从结果可以看出，两种初始值的方式都会被抽取到静态代码块中执行。而执行顺序与代码顺序相关。被final修饰的类变量同样在赋值后不能修改。</p>
+<ul>
+<li><p>final修饰符的另外一个重要用途是定义“宏变量”。在定义final变量时就显示为变量指定初始值，而且在初始值在编译的时候能够确定下来，那么这个final变量本质上就是一个“宏变量”，编译器会把程序中所有用到该变量的地方直接替换成该变量的值。</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">FinalClassVariableTest</span> </span>{
+    <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">44</span>;
+    <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> b ;
+    <span class="keyword">static</span>{
+        b = <span class="number">66</span>;
+    }
+}
+</code></pre></li>
+</ul>
+<p>使用 javap 查看编译情况：</p>
+<pre><code>javap -c <span class="class"><span class="keyword">class</span> <span class="title">FinalClassVariableTest</span></span>
+</code></pre><p>执行结果为：</p>
+<pre><code>E:\Java\test&gt;javap -c FinalClassVariableTest
+Compiled from <span class="string">"FinalClassVariableTest.java"</span>
+<span class="keyword">class</span> FinalClassVariableTest {
+  <span class="keyword">static</span> final <span class="keyword">int</span> a;
+
+  <span class="keyword">static</span> final <span class="keyword">int</span> b;
+
+  FinalClassVariableTest();
+    Code:
+       <span class="number">0</span>: aload_0
+       <span class="number">1</span>: invokespecial <span class="preprocessor">#<span class="number">1</span>                  <span class="comment">// Method java/lang/Object."&lt;init&gt;":()V</span></span>
+       <span class="number">4</span>: <span class="keyword">return</span>
+
+  <span class="keyword">static</span> {};
+    Code:
+       <span class="number">0</span>: bipush        <span class="number">66</span>
+       <span class="number">2</span>: putstatic     <span class="preprocessor">#<span class="number">2</span>                  <span class="comment">// Field b:I</span></span>
+       <span class="number">5</span>: <span class="keyword">return</span>
+}
+</code></pre><p>通过该程序不难发现，当使用final修饰类变量时，如果定义该final类变量时指定了初始值，而且该初始值在编译时就可以确定下来，系统将不会该静态代码块中对该final类变量赋初始值，而是在类定义中直接使用该初始值代替该final变量。</p>
+<p>同理对用final修饰的实例变量，如果在定义该实例变量时就指定了初始值，且该初始值能够在编译时明确确定，虽然系统会在构造函数中对其初始赋值，但是该实例变量也会被系统当做“宏变量”。</p>
+<p>对于一个使用final修饰的变量而言，如果定义该final变量时就指定了初始值，而且这个初始值在编译的时候就能够确定下来，那么这final变量将不再是一个变量，系统将其当成一个“宏变量”处理。也就是说，所有出现该变量的地方，系统直接把他当成对应的值处理。<br>该变量一般被称为直接量。</p>
+<h3 id="final方法不能被重写">final方法不能被重写</h3><h3 id="final类不能派生子类">final类不能派生子类</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pangypeng/pangypeng.github.io/2016/05/05/Java对象及其内存管理/" data-id="cinu3z7bh0000eos6yjafn6o3" class="article-share-link">分享到</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/05/Java的内存回收/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Java的内存回收
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/05/第一行代码之Fragment/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">第一行代码之Fragment</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/05/05/Hibernate学习之（三）架构/" class="thumbnail">
+  
+    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-03.jpg)" alt="Hibernate学习之（三）架构" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Java/">Java</a></p>
+              <p class="item-title"><a href="/2016/05/05/Hibernate学习之（三）架构/" class="title">Hibernate学习之（三）架构</a></p>
+              <p class="item-date"><time datetime="2016-05-05T10:04:54.628Z" itemprop="datePublished">2016-05-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/05/05/Hibernate学习之（二）简介/" class="thumbnail">
+  
+    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-02.jpg)" alt="Hibernate学习之（二）简介" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Java/">Java</a></p>
+              <p class="item-title"><a href="/2016/05/05/Hibernate学习之（二）简介/" class="title">Hibernate学习之（二）简介</a></p>
+              <p class="item-date"><time datetime="2016-05-05T10:04:54.623Z" itemprop="datePublished">2016-05-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/05/05/Java的内存回收/" class="thumbnail">
+  
+    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-11.jpg)" alt="Java的内存回收" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Java/">Java</a></p>
+              <p class="item-title"><a href="/2016/05/05/Java的内存回收/" class="title">Java的内存回收</a></p>
+              <p class="item-date"><time datetime="2016-05-05T09:57:01.000Z" itemprop="datePublished">2016-05-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/05/05/Java对象及其内存管理/" class="thumbnail">
+  
+    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-10.jpg)" alt="Java对象及其内存管理" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Java/">Java</a></p>
+              <p class="item-title"><a href="/2016/05/05/Java对象及其内存管理/" class="title">Java对象及其内存管理</a></p>
+              <p class="item-date"><time datetime="2016-05-05T09:46:42.000Z" itemprop="datePublished">2016-05-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/05/05/第一行代码之Fragment/" class="thumbnail">
+  
+    <span style="background-image:url(http://7xn9sb.com1.z0.glb.clouddn.com/github-io-02.jpg)" alt="第一行代码之Fragment" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a></p>
+              <p class="item-title"><a href="/2016/05/05/第一行代码之Fragment/" class="title">第一行代码之Fragment</a></p>
+              <p class="item-date"><time datetime="2016-05-05T09:36:12.719Z" itemprop="datePublished">2016-05-05</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a><span class="category-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 13.33px;">Android</a> <a href="/tags/Hibernate/" style="font-size: 16.67px;">Hibernate</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 pang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+
+
+ <script src="//ajax.useso.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
